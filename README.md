@@ -21,8 +21,6 @@
 | **Pengurus**     | Semua akses Anggota + Kelola anggota, testimoni, log aktivitas |
 | **Admin**        | Semua akses Pengurus + Kelola user dan landing page            |
 
----
-
 ## 🗃️ Struktur Database
 
 ### Tabel `users`
@@ -53,12 +51,6 @@
 | created_at | timestamp   | Tanggal dibuat                  |
 | updated_at | timestamp   | Tanggal update                  |
 
-### Tabel `blog`, `landing_page_contents`, `activity_logs`, `faq`, `sosmed`, `testimoni`
-
-> Untuk tabel lain, struktur serupa dapat dilihat di file dokumentasi atau di `migration` masing-masing.
-
----
-
 ## 🔗 Relasi Antar Tabel
 
 | Tabel Asal | Tabel Tujuan  | Relasi      | Penjelasan                              |
@@ -67,5 +59,3 @@
 | users      | karya         | one-to-many | Satu user dapat mengunggah banyak karya |
 | users      | activity_logs | one-to-many | Aktivitas dicatat per user              |
 | sosmed     | users         | one-to-one  | Satu akun sosmed per user               |
-
----
