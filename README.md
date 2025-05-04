@@ -27,7 +27,7 @@
 
 ## 🗃️ Struktur Database
 
-### Tabel `users`
+### 1. Tabel `users`
 
 | Field      | Tipe Data        | Keterangan               |
 | ---------- | ---------------- | ------------------------ |
@@ -41,7 +41,7 @@
 | created_at | timestamp        | Tanggal dibuat           |
 | updated_at | timestamp        | Tanggal update           |
 
-### Tabel `creations`
+### 2. Tabel `creations`
 
 | Field      | Tipe Data   | Keterangan                      |
 | ---------- | ----------- | ------------------------------- |
@@ -55,7 +55,7 @@
 | created_at | timestamp   | Tanggal dibuat                  |
 | updated_at | timestamp   | Tanggal update                  |
 
-### Tabel `blogs`
+### 3. Tabel `blogs`
 
 | Field      | Tipe Data   | Keterangan           |
 | ---------- | ----------- | -------------------- |
@@ -68,7 +68,7 @@
 | created_at | timestamp   | Tanggal dibuat       |
 | updated_at | timestamp   | Tanggal update       |
 
-### Tabel `landing_page_contents`
+### 4. Tabel `landing_page_contents`
 
 | Field      | Tipe Data   | Keterangan                   |
 | ---------- | ----------- | ---------------------------- |
@@ -79,7 +79,7 @@
 | created_at | timestamp   | Tanggal dibuat               |
 | updated_at | timestamp   | Tanggal update               |
 
-### Tabel `activity_logs`
+### 5. Tabel `activity_logs`
 
 | Field      | Tipe Data   | Keterangan                                  |
 | ---------- | ----------- | ------------------------------------------- |
@@ -88,7 +88,7 @@
 | aktivitas  | text        | Deskripsi aktivitas (misal: "unggah karya") |
 | created_at | timestamp   | Tanggal dan waktu aktivitas                 |
 
-### Tabel `faqs`
+### 6. Tabel `faqs`
 
 | Field      | Tipe Data   | Keterangan                      |
 | ---------- | ----------- | ------------------------------- |
@@ -98,7 +98,7 @@
 | created_at | timestamp   | Tanggal dibuat                  |
 | updated_at | timestamp   | Tanggal diperbarui              |
 
-### Tabel `sosmeds`
+### 7. Tabel `sosmeds`
 
 | Field      | Tipe Data   | Keterangan                           |
 | ---------- | ----------- | ------------------------------------ |
@@ -109,7 +109,7 @@
 | created_at | timestamp   | Tanggal dibuat                       |
 | updated_at | timestamp   | Tanggal diperbarui                   |
 
-### Tabel `testimoni`
+### 8. Tabel `testimoni`
 
 | Field      | Tipe Data   | Keterangan             |
 | ---------- | ----------- | ---------------------- |
