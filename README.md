@@ -16,12 +16,12 @@
 
 ## 🧑‍🤝‍🧑 Role dan Hak Akses
 
-| Role             | Akses                                                          |
-| ---------------- | -------------------------------------------------------------- |
-| **User** (Guest) | Melihat landing page, blog, prestasi, testimoni                |
-| **Anggota**      | Semua akses User + Mengunggah karya                            |
-| **Pengurus**     | Semua akses Anggota + Kelola anggota, testimoni, log aktivitas |
-| **Admin**        | Semua akses Pengurus + Kelola user dan landing page            |
+| Role         | Akses                                                          |
+| ------------ | -------------------------------------------------------------- |
+| **Guest**    | Melihat landing page, blog, prestasi, testimoni                |
+| **Anggota**  | Semua akses Guest + Mengunggah karya                           |
+| **Pengurus** | Semua akses Anggota + Kelola anggota, testimoni, log aktivitas |
+| **Admin**    | Semua akses Pengurus + Kelola user dan landing page            |
 
 ---
 
@@ -37,7 +37,7 @@
 | password   | varchar          | Password terenkripsi     |
 | nim        | char             | NIM anggota              |
 | angkatan   | year             | Tahun angkatan           |
-| role       | enum             | admin, pengurus, anggota |
+| role       | enum             | anggota, pengurus, admin |
 | created_at | timestamp        | Tanggal dibuat           |
 | updated_at | timestamp        | Tanggal update           |
 
@@ -109,7 +109,7 @@
 | created_at | timestamp   | Tanggal dibuat                       |
 | updated_at | timestamp   | Tanggal diperbarui                   |
 
-### 8. Tabel `testimoni`
+### 8. Tabel `testimonials`
 
 | Field      | Tipe Data   | Keterangan             |
 | ---------- | ----------- | ---------------------- |
@@ -123,9 +123,9 @@
 
 | Tabel Asal | Tabel Tujuan  | Relasi      | Penjelasan                              |
 | ---------- | ------------- | ----------- | --------------------------------------- |
-| users      | blog          | one-to-many | Satu user dapat membuat banyak blog     |
-| users      | karya         | one-to-many | Satu user dapat mengunggah banyak karya |
+| users      | blogs         | one-to-many | Satu user dapat membuat banyak blog     |
+| users      | creations     | one-to-many | Satu user dapat mengunggah banyak karya |
 | users      | activity_logs | one-to-many | Aktivitas dicatat per user              |
-| sosmed     | users         | one-to-one  | Satu akun sosmed per user               |
+| sosmeds    | users         | one-to-one  | Satu akun sosmed per user               |
 
 ---
