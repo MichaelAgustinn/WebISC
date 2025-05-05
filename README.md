@@ -16,12 +16,12 @@
 
 ## 🧑‍🤝‍🧑 Role dan Hak Akses
 
-| Role         | Akses                                                          |
-| ------------ | -------------------------------------------------------------- |
-| **Guest**    | Melihat landing page, blog, prestasi, testimoni                |
-| **Anggota**  | Semua akses Guest + Mengunggah karya                           |
-| **Pengurus** | Semua akses Anggota + Kelola anggota, testimoni, log aktivitas |
-| **Admin**    | Semua akses Pengurus + Kelola user dan landing page            |
+| Role         | Akses                                                                              |
+| ------------ | ---------------------------------------------------------------------------------- |
+| **Guest**    | Melihat landing page, blog, prestasi, testimoni                                    |
+| **Anggota**  | Semua akses Guest + Mengunggah karya                                               |
+| **Pengurus** | Semua akses Anggota + Kelola anggota, testimoni, log aktivitas, bisa aprrove karya |
+| **Admin**    | Semua akses Pengurus + Kelola user dan landing page                                |
 
 ---
 
@@ -52,6 +52,7 @@
 | deskripsi  | text        | Deskripsi karya                 |
 | image_path | varchar     | Path gambar karya               |
 | divisi     | enum        | Website, Mobile, IoT, UI/UX, AI |
+| status     | enum        | Status dari karya postingan     |
 | created_at | timestamp   | Tanggal dibuat                  |
 | updated_at | timestamp   | Tanggal update                  |
 
