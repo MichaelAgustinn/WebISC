@@ -18,7 +18,7 @@
 
 | Role         | Akses                                                                              |
 | ------------ | ---------------------------------------------------------------------------------- |
-| **Anggota**  | Semua akses Guest + Mengunggah karya                                               |
+| **Anggota**  | Akses landing page + Mengunggah karya                                              |
 | **Pengurus** | Semua akses Anggota + Kelola anggota, testimoni, log aktivitas, bisa aprrove karya |
 | **Admin**    | Semua akses Pengurus + Kelola user dan landing page                                |
 
@@ -34,9 +34,9 @@
 | name       | varchar          | Nama pengguna            |
 | email      | varchar (unique) | Email pengguna           |
 | password   | varchar          | Password terenkripsi     |
+| role       | enum             | anggota, pengurus, admin |
 | nim        | char             | NIM anggota              |
 | angkatan   | year             | Tahun angkatan           |
-| role       | enum             | anggota, pengurus, admin |
 | created_at | timestamp        | Tanggal dibuat           |
 | updated_at | timestamp        | Tanggal update           |
 
@@ -100,13 +100,14 @@
 
 ### 7. Tabel `sosmeds`
 
-| Field      | Tipe Data   | Keterangan                      |
-| ---------- | ----------- | ------------------------------- |
-| id         | bigint (PK) | ID sosial media                 |
-| nama       | varchar     | Nama platform (Instagram, dsb.) |
-| url        | varchar     | URL ke sosial media             |
-| created_at | timestamp   | Tanggal dibuat                  |
-| updated_at | timestamp   | Tanggal diperbarui              |
+| Field      | Tipe Data   | Keterangan          |
+| ---------- | ----------- | ------------------- |
+| id         | bigint (PK) | ID sosial media     |
+| instagram  | varchar     | URL ke sosial media |
+| facebook   | varchar     | URL ke sosial media |
+| github     | varchar     | URL ke sosial media |
+| created_at | timestamp   | Tanggal dibuat      |
+| updated_at | timestamp   | Tanggal diperbarui  |
 
 ### 8. Tabel `testimonials`
 
@@ -118,13 +119,24 @@
 | created_at | timestamp   | Tanggal dibuat         |
 | updated_at | timestamp   | Tanggal diperbarui     |
 
+### 9. Tabel `member_creations`
+
+| Field       | Tipe Data   | Keterangan            |
+| ----------- | ----------- | --------------------- |
+| id          | bigint (PK) | ID creations          |
+| user_id     | foreign key | Relasi ke `users`     |
+| creation_id | foreign key | relasi ke `creations` |
+
 ## 🔗 Relasi Antar Tabel
 
-| Tabel Asal | Tabel Tujuan  | Relasi      | Penjelasan                              |
-| ---------- | ------------- | ----------- | --------------------------------------- |
-| users      | blogs         | one-to-many | Satu user dapat membuat banyak blog     |
-| users      | creations     | one-to-many | Satu user dapat mengunggah banyak karya |
-| users      | activity_logs | one-to-many | Aktivitas dicatat per user              |
-| sosmeds    | users         | one-to-one  | Satu akun sosmed per user               |
+| Tabel Asal      | Tabel Tujuan     | Relasi       | Penjelasan                                    |
+| --------------- | ---------------- | ------------ | --------------------------------------------- |
+| users(pengurus) | blogs            | one-to-many  | Satu user(pengurus) dapat membuat banyak blog |
+| users           | activity_logs    | one-to-many  | Aktivitas dicatat per user                    |
+| sosmeds         | users            | one-to-one   | Satu akun sosmed per user                     |
+| ----------      | ---------------- | -----------  | --------------------------------------------- |
+| users           | member_creations | one-to-many  | Satu user dapat memiliki banyak member karya  |
+| creations       | member_creations | one-to-many  | Satu karya dapat memiliki banyak member karya |
+| users           | creations        | many-to-many | Dihubungkan oleh tabel member_creations       |
 
 ---
