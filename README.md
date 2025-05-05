@@ -18,7 +18,6 @@
 
 | Role         | Akses                                                                              |
 | ------------ | ---------------------------------------------------------------------------------- |
-| **Guest**    | Melihat landing page, blog, prestasi, testimoni                                    |
 | **Anggota**  | Semua akses Guest + Mengunggah karya                                               |
 | **Pengurus** | Semua akses Anggota + Kelola anggota, testimoni, log aktivitas, bisa aprrove karya |
 | **Admin**    | Semua akses Pengurus + Kelola user dan landing page                                |
