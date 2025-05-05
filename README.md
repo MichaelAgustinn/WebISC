@@ -100,14 +100,13 @@
 
 ### 7. Tabel `sosmeds`
 
-| Field      | Tipe Data   | Keterangan                           |
-| ---------- | ----------- | ------------------------------------ |
-| id         | bigint (PK) | ID sosial media                      |
-| nama       | varchar     | Nama platform (Instagram, dsb.)      |
-| icon       | varchar     | Nama ikon (misal: fontawesome class) |
-| url        | varchar     | URL ke sosial media                  |
-| created_at | timestamp   | Tanggal dibuat                       |
-| updated_at | timestamp   | Tanggal diperbarui                   |
+| Field      | Tipe Data   | Keterangan                      |
+| ---------- | ----------- | ------------------------------- |
+| id         | bigint (PK) | ID sosial media                 |
+| nama       | varchar     | Nama platform (Instagram, dsb.) |
+| url        | varchar     | URL ke sosial media             |
+| created_at | timestamp   | Tanggal dibuat                  |
+| updated_at | timestamp   | Tanggal diperbarui              |
 
 ### 8. Tabel `testimonials`
 
