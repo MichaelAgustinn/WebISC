@@ -37,6 +37,7 @@
 | role       | enum             | anggota, pengurus, admin |
 | nim        | char             | NIM anggota              |
 | angkatan   | year             | Tahun angkatan           |
+| jabatan    | varchar          | jabatan user             |
 | created_at | timestamp        | Tanggal dibuat           |
 | updated_at | timestamp        | Tanggal update           |
 
@@ -87,27 +88,31 @@
 | user_id    | foreign key | Relasi ke `users`                           |
 | aktivitas  | text        | Deskripsi aktivitas (misal: "unggah karya") |
 | created_at | timestamp   | Tanggal dan waktu aktivitas                 |
+| updated_at | timestamp   | Tanggal update                              |
 
 ### 6. Tabel `faqs`
 
 | Field      | Tipe Data   | Keterangan                      |
 | ---------- | ----------- | ------------------------------- |
 | id         | bigint (PK) | ID FAQ                          |
-| pertanyaan | text        | Pertanyaan umum dari user       |
-| jawaban    | text        | Jawaban dari tim pengurus/admin |
+| question   | text        | Pertanyaan umum dari user       |
+| answered   | text        | Jawaban dari tim pengurus/admin |
 | created_at | timestamp   | Tanggal dibuat                  |
 | updated_at | timestamp   | Tanggal diperbarui              |
 
 ### 7. Tabel `sosmeds`
 
-| Field      | Tipe Data   | Keterangan          |
-| ---------- | ----------- | ------------------- |
-| id         | bigint (PK) | ID sosial media     |
-| instagram  | varchar     | URL ke sosial media |
-| facebook   | varchar     | URL ke sosial media |
-| github     | varchar     | URL ke sosial media |
-| created_at | timestamp   | Tanggal dibuat      |
-| updated_at | timestamp   | Tanggal diperbarui  |
+| Field      | Tipe Data   | Keterangan                       |
+| ---------- | ----------- | -------------------------------- |
+| id         | bigint (PK) | ID sosial media                  |
+| user_id    | foreign key | Relasi ke `users`                |
+| instagram  | varchar     | URL ke sosial media              |
+| facebook   | varchar     | URL ke sosial media              |
+| github     | varchar     | URL ke sosial media              |
+| discord    | varchar     | link server discord(hanya admin) |
+| email      | varchar     | email user                       |
+| created_at | timestamp   | Tanggal dibuat                   |
+| updated_at | timestamp   | Tanggal diperbarui               |
 
 ### 8. Tabel `testimonials`
 
@@ -129,14 +134,14 @@
 
 ## 🔗 Relasi Antar Tabel
 
-| Tabel Asal      | Tabel Tujuan     | Relasi       | Penjelasan                                    |
-| --------------- | ---------------- | ------------ | --------------------------------------------- |
-| users(pengurus) | blogs            | one-to-many  | Satu user(pengurus) dapat membuat banyak blog |
-| users           | activity_logs    | one-to-many  | Aktivitas dicatat per user                    |
-| sosmeds         | users            | one-to-one   | Satu akun sosmed per user                     |
-| ----------      | ---------------- | -----------  | --------------------------------------------- |
-| users           | member_creations | one-to-many  | Satu user dapat memiliki banyak member karya  |
-| creations       | member_creations | one-to-many  | Satu karya dapat memiliki banyak member karya |
-| users           | creations        | many-to-many | Dihubungkan oleh tabel member_creations       |
+| Tabel Asal | Tabel Tujuan     | Relasi       | Penjelasan                                    |
+| ---------- | ---------------- | ------------ | --------------------------------------------- |
+| users      | blogs            | one-to-many  | Satu user dapat membuat banyak blog           |
+| users      | activity_logs    | one-to-many  | Aktivitas dicatat per user                    |
+| sosmeds    | users            | one-to-one   | Satu akun sosmed per user                     |
+| ---------- | ---------------- | -----------  | --------------------------------------------- |
+| users      | member_creations | one-to-many  | Satu user dapat memiliki banyak member karya  |
+| creations  | member_creations | one-to-many  | Satu karya dapat memiliki banyak member karya |
+| users      | creations        | many-to-many | Dihubungkan oleh tabel member_creations       |
 
 ---
