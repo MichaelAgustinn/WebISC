@@ -6,12 +6,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>jsGrid</h1>
+                        <h1>Simple Tables</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">jsGrid</li>
+                            <li class="breadcrumb-item active">Simple Tables</li>
                         </ol>
                     </div>
                 </div>
@@ -20,60 +20,39 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">jsGrid</h3>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Expandable Table</h3>
+                            </div>
+                            <!-- ./card-header -->
+                            <div class="card-body">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>User</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th>Reason</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr data-widget="expandable-table" aria-expanded="false">
+                                            <td>183</td>
+                                            <td>John Doe</td>
+                                            <td>11-7-2014</td>
+                                            <td>Approved</td>
+                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <div id="jsGrid1">name </div>
-                </div>
-                <!-- /.card-body -->
             </div>
-            <!-- /.card -->
         </section>
-        <!-- /.content -->
     </div>
 @endsection
-<script>
-    $(function() {
-        $("#jsGrid1").jsGrid({
-            height: "100%",
-            width: "100%",
-
-            sorting: true,
-            paging: true,
-
-            data: db.clients,
-
-            fields: [{
-                    name: "Name",
-                    type: "text",
-                    width: 150
-                },
-                {
-                    name: "Age",
-                    type: "number",
-                    width: 50
-                },
-                {
-                    name: "Address",
-                    type: "text",
-                    width: 200
-                },
-                {
-                    name: "Country",
-                    type: "select",
-                    items: db.countries,
-                    valueField: "Id",
-                    textField: "Name"
-                },
-                {
-                    name: "Married",
-                    type: "checkbox",
-                    title: "Is Married"
-                }
-            ]
-        });
-    });
-</script>
