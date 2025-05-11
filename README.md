@@ -38,6 +38,7 @@
 | nim        | char             | NIM anggota              |
 | angkatan   | year             | Tahun angkatan           |
 | jabatan    | varchar          | jabatan user             |
+| foto       | varchar          | jabatan user             |
 | created_at | timestamp        | Tanggal dibuat           |
 | updated_at | timestamp        | Tanggal update           |
 
