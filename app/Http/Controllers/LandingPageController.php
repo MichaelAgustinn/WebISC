@@ -12,7 +12,7 @@ class LandingPageController extends Controller
         return view('dashboard.general');
     }
 
-    public function tambah(Request $request)
+    public function create(Request $request)
     {
         $data = new Landing_page_content;
         $data->section = $request->section;
