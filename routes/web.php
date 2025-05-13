@@ -11,25 +11,29 @@ Route::get('/', function () {
     return view('welcome');
 })->name('anu');
 
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
+Route::get('/faq', function () {
+    return view('dashboard.faq');
+})->name('faqadmin');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
-
     Route::get('/editor', function () {
         return view('dashboard.editor');
     })->name('editor');
 
-    Route::get('/general', [LandingPageController::class, 'index'])->name('general');
-    Route::post('/general/store', [LandingPageController::class, 'tambah'])->name('generalStore');
-
+    Route::resource('landingpage', LandingPageController::class);
+    // Route::post('/general/store', [LandingPageController::class, 'tambah'])->name('generalStore');
     Route::get('/listuser', [UserController::class, 'index'])->name('listuser');
+
     Route::get('/validate-member', [UserController::class, 'validate'])->name('validate');
+    Route::get('/add-member', [UserController::class, 'addMember'])->name('addMember');
+    Route::post('/add-member/store', [UserController::class, 'storeMember'])->name('storeMember');
+
+
+    Route::patch('/validate-member-true/{id}', [UserController::class, 'validated'])->name('validated');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

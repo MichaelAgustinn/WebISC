@@ -11,7 +11,8 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="{{ 'storage/' . Auth::user()->foto }}" class="img-circle elevation-2" alt="User Image">
+                    <img src="{{ Auth::user()->foto ? 'storage/' . Auth::user()->foto : 'storage/photo_profil/default.jpg' }}"
+                        class="img-circle elevation-2" alt="profil">
                 </div>
                 <div class="info">
                     <a href="#" class="d-block">{{ Auth::user()->name }}</a>
@@ -46,15 +47,21 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('general') }}" class="nav-link">
+                                    <a href="{{ route('landingpage.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>General Elements</p>
+                                        <p>Landing Page</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('editor') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Editors</p>
+                                        <p>Blog</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('addMember') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>User | Add</p>
                                     </a>
                                 </li>
                             </ul>
@@ -82,7 +89,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/examples/faq.html" class="nav-link">
+                                <a href="{{ route('faqadmin') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>FAQ</p>
                                 </a>

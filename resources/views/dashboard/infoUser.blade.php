@@ -56,7 +56,7 @@
                                                 </ul>
                                             </div>
                                             <div class="col-5 text-center">
-                                                <img src="{{ asset('storage/' . $iu->foto ?? 'photo_profil/default.png') }}"
+                                                <img src="{{ $iu->foto ? 'storage/' . $iu->foto : 'storage/photo_profil/default.jpg' }}"
                                                     alt="user-avatar" class="img-circle img-fluid">
                                             </div>
                                         </div>
