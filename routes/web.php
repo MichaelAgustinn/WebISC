@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('landingpage.index');
 })->name('anu');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
@@ -17,13 +17,15 @@ Route::get('/faq', function () {
     return view('dashboard.faq');
 })->name('faqadmin');
 
+Route::resource('landingpage', LandingPageController::class);
+
+// Route::get('tes/creates', [LandingPageController::class, 'create']);
+
 Route::middleware('auth')->group(function () {
     Route::get('/editor', function () {
         return view('dashboard.editor');
     })->name('editor');
 
-    Route::resource('landingpage', LandingPageController::class);
-    // Route::post('/general/store', [LandingPageController::class, 'tambah'])->name('generalStore');
     Route::get('/listuser', [UserController::class, 'index'])->name('listuser');
 
     Route::get('/validate-member', [UserController::class, 'validate'])->name('validate');
@@ -41,7 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/testing', function () {
+Route::get('uy', function () {
     return 'MASUK MASS';
 })->name('testing');
 

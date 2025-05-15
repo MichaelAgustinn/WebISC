@@ -7,7 +7,7 @@
 
     <!-- Favicons -->
     <link href="{{ asset('favicon.ico') }}" rel="icon">
-    <link href="{{ asset('landingpage') }}/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{{ asset('landingpages') }}/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -17,13 +17,13 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="{{ asset('landingpage') }}/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ asset('landingpage') }}/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="{{ asset('landingpage') }}/assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="{{ asset('landingpage') }}/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="{{ asset('landingpage') }}/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="{{ asset('landingpages') }}/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('landingpages') }}/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="{{ asset('landingpages') }}/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="{{ asset('landingpages') }}/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="{{ asset('landingpages') }}/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
     <!-- Main CSS File -->
-    <link href="{{ asset('landingpage') }}/assets/css/main.css" rel="stylesheet">
+    <link href="{{ asset('landingpages') }}/assets/css/main.css" rel="stylesheet">
 
 </head>

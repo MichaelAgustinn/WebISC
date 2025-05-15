@@ -2,8 +2,8 @@
 
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
-        <h2>Clients</h2>
-        <p>We work with best clients<br></p>
+        <h2>Division</h2>
+        <p>Our Best Division<br></p>
     </div><!-- End Section Title -->
 
     <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -43,21 +43,19 @@
   }
 </script>
             <div class="swiper-wrapper align-items-center">
-                <div class="swiper-slide"><img src="{{ asset('landingpage') }}/assets/img/clients/client-1.png"
+                <div class="swiper-slide"><img src="{{ asset('landingpages') }}/assets/img/clients/client-1.png"
                         class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="{{ asset('landingpage') }}/assets/img/clients/client-2.png"
+                <div class="swiper-slide"><img src="{{ asset('landingpages') }}/assets/img/clients/client-2.png"
                         class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="{{ asset('landingpage') }}/assets/img/clients/client-3.png"
+                <div class="swiper-slide"><img src="{{ asset('landingpages') }}/assets/img/clients/client-3.png"
                         class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="{{ asset('landingpage') }}/assets/img/clients/client-4.png"
+                <div class="swiper-slide"><img src="{{ asset('landingpages') }}/assets/img/clients/client-4.png"
                         class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="{{ asset('landingpage') }}/assets/img/clients/client-5.png"
+                <div class="swiper-slide"><img src="{{ asset('landingpages') }}/assets/img/clients/client-5.png"
                         class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="{{ asset('landingpage') }}/assets/img/clients/client-6.png"
+                <div class="swiper-slide"><img src="{{ asset('landingpages') }}/assets/img/clients/client-6.png"
                         class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="{{ asset('landingpage') }}/assets/img/clients/client-7.png"
-                        class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="{{ asset('landingpage') }}/assets/img/clients/client-8.png"
+                <div class="swiper-slide"><img src="{{ asset('landingpages') }}/assets/img/clients/client-7.png"
                         class="img-fluid" alt=""></div>
             </div>
             <div class="swiper-pagination"></div>

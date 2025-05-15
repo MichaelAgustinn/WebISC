@@ -49,7 +49,7 @@
                             risus at semper.
                         </p>
                         <div class="profile mt-auto">
-                            <img src="{{ asset('landingpage') }}/assets/img/testimonials/testimonials-1.jpg"
+                            <img src="{{ asset('landingpages') }}/assets/img/testimonials/testimonials-1.jpg"
                                 class="testimonial-img" alt="">
                             <h3>Saul Goodman</h3>
                             <h4>Ceo &amp; Founder</h4>
@@ -70,7 +70,7 @@
                             legam anim culpa.
                         </p>
                         <div class="profile mt-auto">
-                            <img src="{{ asset('landingpage') }}/assets/img/testimonials/testimonials-2.jpg"
+                            <img src="{{ asset('landingpages') }}/assets/img/testimonials/testimonials-2.jpg"
                                 class="testimonial-img" alt="">
                             <h3>Sara Wilsson</h3>
                             <h4>Designer</h4>
@@ -91,7 +91,7 @@
                             minim.
                         </p>
                         <div class="profile mt-auto">
-                            <img src="{{ asset('landingpage') }}/assets/img/testimonials/testimonials-3.jpg"
+                            <img src="{{ asset('landingpages') }}/assets/img/testimonials/testimonials-3.jpg"
                                 class="testimonial-img" alt="">
                             <h3>Jena Karlis</h3>
                             <h4>Store Owner</h4>
@@ -112,7 +112,7 @@
                             dolore labore illum veniam.
                         </p>
                         <div class="profile mt-auto">
-                            <img src="{{ asset('landingpage') }}/assets/img/testimonials/testimonials-4.jpg"
+                            <img src="{{ asset('landingpages') }}/assets/img/testimonials/testimonials-4.jpg"
                                 class="testimonial-img" alt="">
                             <h3>Matt Brandon</h3>
                             <h4>Freelancer</h4>
@@ -133,7 +133,7 @@
                             culpa fore nisi cillum quid.
                         </p>
                         <div class="profile mt-auto">
-                            <img src="{{ asset('landingpage') }}/assets/img/testimonials/testimonials-5.jpg"
+                            <img src="{{ asset('landingpages') }}/assets/img/testimonials/testimonials-5.jpg"
                                 class="testimonial-img" alt="">
                             <h3>John Larson</h3>
                             <h4>Entrepreneur</h4>

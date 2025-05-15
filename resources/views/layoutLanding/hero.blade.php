@@ -2,9 +2,8 @@
     <div class="container">
         <div class="row gy-4">
             <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-                <h1 data-aos="fade-up">Informatics Study Club</h1>
-                <p data-aos="fade-up" data-aos-delay="100">We are team of talented designers making websites
-                    with Bootstrap</p>
+                <h1 data-aos="fade-up">{{ $hero->judul }}</h1>
+                <p data-aos="fade-up" data-aos-delay="100">{{ $hero->content }}</p>
                 <div class="d-flex flex-column flex-md-row" data-aos="fade-up" data-aos-delay="200">
                     <a href="#about" class="btn-get-started">Get Started <i class="bi bi-arrow-right"></i></a>
                     <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8"
@@ -13,7 +12,10 @@
                 </div>
             </div>
             <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out">
-                <img src="{{ asset('landingpage') }}/assets/img/hero-img.png" class="img-fluid animated" alt="">
+                {{-- <img src="{{ asset('landingpages') }}/assets/img/hero-img.png" class="img-fluid animated" width="530"
+                    height="530" alt=""> --}}
+                <img src="{{ asset('storage/' . $hero->foto) }}" class="img-fluid animated"
+                    style="object-fit: cover;" />
             </div>
         </div>
     </div>

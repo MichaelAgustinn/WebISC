@@ -14,7 +14,7 @@
               <div class="post-item position-relative h-100" data-aos="fade-up" data-aos-delay="100">
 
                   <div class="post-img position-relative overflow-hidden">
-                      <img src="{{ asset('landingpage') }}/assets/img/blog/blog-1.jpg" class="img-fluid"
+                      <img src="{{ asset('landingpages') }}/assets/img/blog/blog-1.jpg" class="img-fluid"
                           alt="">
                       <span class="post-date">December 12</span>
                   </div>
@@ -47,7 +47,7 @@
               <div class="post-item position-relative h-100" data-aos="fade-up" data-aos-delay="200">
 
                   <div class="post-img position-relative overflow-hidden">
-                      <img src="{{ asset('landingpage') }}/assets/img/blog/blog-2.jpg" class="img-fluid"
+                      <img src="{{ asset('landingpages') }}/assets/img/blog/blog-2.jpg" class="img-fluid"
                           alt="">
                       <span class="post-date">July 17</span>
                   </div>
@@ -80,7 +80,7 @@
               <div class="post-item position-relative h-100">
 
                   <div class="post-img position-relative overflow-hidden">
-                      <img src="{{ asset('landingpage') }}/assets/img/blog/blog-3.jpg" class="img-fluid"
+                      <img src="{{ asset('landingpages') }}/assets/img/blog/blog-3.jpg" class="img-fluid"
                           alt="">
                       <span class="post-date">September 05</span>
                   </div>

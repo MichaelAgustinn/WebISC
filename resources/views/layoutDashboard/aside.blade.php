@@ -11,7 +11,7 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="{{ Auth::user()->foto ? 'storage/' . Auth::user()->foto : 'storage/photo_profil/default.jpg' }}"
+                    <img src="{{ asset(Auth::user()->foto ? 'storage/' . Auth::user()->foto : 'storage/photo_profil/default.jpg') }}"
                         class="img-circle elevation-2" alt="profil">
                 </div>
                 <div class="info">
@@ -47,7 +47,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('landingpage.index') }}" class="nav-link">
+                                    <a href="{{ route('landingpage.create') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Landing Page</p>
                                     </a>

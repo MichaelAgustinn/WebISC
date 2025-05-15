@@ -73,7 +73,6 @@
                                         <input type="text" class="form-control" id="section" placeholder="Jabatan"
                                             name="jabatan">
                                     </div>
-
                                     <div class="form-group dropdown">
                                         <label for="jabatan">Divisi</label>
                                         <select class="form-control" id="role" name="divisi">
@@ -84,7 +83,6 @@
                                             <option value="Internet Of Things">Internet Of Things</option>
                                         </select>
                                     </div>
-
                                     <div class="form-group">
                                         <label for="exampleInputFile">File input</label>
                                         <div class="input-group">
@@ -104,7 +102,6 @@
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>
