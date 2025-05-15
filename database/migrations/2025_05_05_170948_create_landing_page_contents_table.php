@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('landing_page_contents', function (Blueprint $table) {
             $table->id();
-            $table->enum('section', ['description', 'visi', 'misi']);
+            $table->enum('section', ['description', 'visi', 'misi', 'about']);
+            $table->string('judul');
             $table->text('content');
-            $table->string('image_path')->nullable();
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }
