@@ -2,6 +2,8 @@
     <script src="{{ asset('admin') }}/plugins/jquery/jquery.min.js"></script>
 
     {{-- <script src="{{ asset('admin') }}/plugins/jquery/jquery.min.js"></script> --}}
+    {{-- <script src="{{ asset('admin') }}/plugins/jquery/jquery.min.js"></script> --}}
+
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('admin') }}/plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -33,10 +35,10 @@
     <!-- AdminLTE App -->
     <script src="{{ asset('admin') }}/dist/js/adminlte.js"></script>
     <script src="{{ asset('admin') }}/dist/js/adminlte2.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    {{-- <script src="{{ asset('admin') }}/dist/js/demo.js"></script> --}}
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('admin') }}/dist/js/pages/dashboard.js"></script>
+
+    <!-- AdminLTE App -->
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">

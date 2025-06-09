@@ -17,11 +17,6 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->enum('role', ['None', 'Anggota', 'Pengurus', 'Admin'])->default('None');
-            $table->char('nim')->nullable();
-            $table->year('angkatan')->nullable();
-            $table->string('jabatan')->nullable();
-            $table->enum('divisi', ['None', 'Website', 'Mobile', 'Internet Of Things', 'Sistem Cerdas'])->default('None');
-            $table->string('foto')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

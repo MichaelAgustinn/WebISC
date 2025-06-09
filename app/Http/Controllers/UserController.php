@@ -10,13 +10,13 @@ class UserController extends Controller
     public function index()
     {
         $infouser = User::all();
-        return view('dashboard.infoUser', ['infouser' => $infouser]);
+        return view('dashboard.member.infoUser', ['infouser' => $infouser]);
     }
 
     public function addMember()
     {
         $infouser = User::all();
-        return view('dashboard.addMember', ['infouser' => $infouser]);
+        return view('dashboard.member.addMember', ['infouser' => $infouser]);
     }
 
     public function storeMember(Request $request)
@@ -58,7 +58,7 @@ class UserController extends Controller
     public function validate()
     {
         $unverUser = User::where('role', 'None')->get();
-        return view('dashboard.validasi', ['unverUser' => $unverUser]);
+        return view('dashboard.member.validasi', ['unverUser' => $unverUser]);
     }
 
     public function validated($id)

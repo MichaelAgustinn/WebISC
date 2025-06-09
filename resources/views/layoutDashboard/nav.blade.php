@@ -12,28 +12,31 @@
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                <img src="{{ asset(Auth::user()->foto ? 'storage/' . Auth::user()->foto : 'storage/photo_profil/default.jpg') }}"
+                <img src="{{ asset(Auth::user()->profile->foto ? 'storage/' . Auth::user()->profile->foto : 'storage/photo_profil/default.jpg') }}"
                     class="user-image rounded-circle shadow" alt="User Image" />
                 <span class="d-none d-md-inline"> {{ Auth::user()->name }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <!--begin::User Image-->
                 <li class="user-header text-bg-primary text-center">
-                    <img src="{{ asset(Auth::user()->foto ? 'storage/' . Auth::user()->foto : 'storage/photo_profil/default.jpg') }}"
+                    <img src="{{ asset(Auth::user()->profile->foto ? 'storage/' . Auth::user()->profile->foto : 'storage/photo_profil/default.jpg') }}"
                         class="rounded-circle shadow" alt="User Image" />
                     <p>
-                        {{ Auth::user()->name }} - {{ Auth::user()->jabatan }}
+                        {{ Auth::user()->name }} - {{ Auth::user()->profile->jabatan }}
                     </p>
                 </li>
                 <li class="user-footer text-center">
-                    <a href="{{ route('profile.edit') }}" class="btn btn-default btn-flat">
-                        {{ __('Profile') }}</a>
+                    <form class="btn btn-flat float-end">
+                        <a href="{{ route('profile.index') }}" class="btn btn-default btn-flat">
+                            {{ __('Profile') }}</a>
+                    </form>
                     {{-- <a class="btn btn-default btn-flat float-end"> --}}
-                    <form method="POST" action="{{ route('logout') }}" class="btn btn-default btn-flat float-end"
+                    <form method="POST" action="{{ route('logout') }}" class="btn btn-flat float-end"
                         onclick="event.preventDefault();
                                 this.closest('form').submit();">
                         @csrf
-                        {{ __('Log Out') }}
+                        <a href="" class="btn btn-default btn-flat">
+                            {{ __('Log Out') }}</a>
                     </form>
                     {{-- </a> --}}
                 </li>

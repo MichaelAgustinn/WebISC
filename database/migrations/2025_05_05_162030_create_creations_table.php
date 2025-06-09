@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('creations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('user_name');
             $table->string('title');
             $table->text('description');
             $table->string('image_path')->nullable();
-            $table->enum('divisi', ['mobile', 'website', 'IoT', 'UI/UX', 'Sistem Cerdas']);
+            $table->enum('divisi', ['Mobile', 'Website', 'IoT', 'UIUX', 'SistemCerdas']);
             $table->enum('status', ['pending', 'approve', 'rejected'])->default('pending');
             $table->timestamps();
         });

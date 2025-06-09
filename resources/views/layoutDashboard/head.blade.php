@@ -28,6 +28,8 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('admin') }}/plugins/summernote/summernote-bs4.min.css">
 
+    <link rel="stylesheet" href="{{ asset('admin') }}/dist/css/adminlte.min.css">
+
 
     <style>
         .navbar-nav .dropdown-menu {

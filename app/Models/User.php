@@ -27,10 +27,21 @@ class User extends Authenticatable
         return $this->hasOne(Sosmed::class);
     }
 
-    public function Member_creation()
+    public function profile()
     {
-        return $this->hasMany(Member_creation::class);
+        return $this->hasOne(Profile::class);
     }
+
+    public function creation()
+    {
+        return $this->belongsToMany(Creation::class);
+    }
+
+    public function event()
+    {
+        return $this->belongsToMany(Event::class)->withPivot('is_verified')->withTimestamps();
+    }
+
 
     /**
      * The attributes that are mass assignable.

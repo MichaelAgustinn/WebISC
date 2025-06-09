@@ -1,3 +1,4 @@
+    {{-- @dd(Auth::user()->profile->foto) --}}
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="{{ route('dashboard') }}" class="brand-link">
@@ -11,7 +12,7 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="{{ asset(Auth::user()->foto ? 'storage/' . Auth::user()->foto : 'storage/photo_profil/default.jpg') }}"
+                    <img src="{{ asset(Auth::user()->profile->foto ? 'storage/' . Auth::user()->profile->foto : 'storage/photo_profil/default.jpg') }}"
                         class="img-circle elevation-2" alt="profil">
                 </div>
                 <div class="info">
@@ -37,11 +38,12 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     @if (Auth::user()->role === 'Admin' || Auth::user()->role === 'Pengurus')
+                        {{-- hero crud --}}
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-edit"></i>
                                 <p>
-                                    Forms
+                                    Landing Page
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -49,19 +51,94 @@
                                 <li class="nav-item">
                                     <a href="{{ route('landingpage.create') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Landing Page</p>
+                                        <p>Hero | Landing page</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('editor') }}" class="nav-link">
+                                    <a href="{{ route('about.create') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Blog</p>
+                                        <p>About | Landing page</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('visi.create') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Visi | Landing page</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        {{-- blog crud --}}
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-edit"></i>
+                                <p>
+                                    Blog
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('editor') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Blog | Tambah</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Blog | Lihat</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        {{-- user crud --}}
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-edit"></i>
+                                <p>
+                                    User
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ route('addMember') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>User | Add</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('validate') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Member Activation</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        {{-- karya crud --}}
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-edit"></i>
+                                <p>
+                                    Karya
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('karya.lihat') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Tambah Karya</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lihat Karya</p>
                                     </a>
                                 </li>
                             </ul>
@@ -80,12 +157,6 @@
                                 <a href="{{ route('listuser') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Member Information</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('validate') }}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Member Activation</p>
                                 </a>
                             </li>
                             <li class="nav-item">
