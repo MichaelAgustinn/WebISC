@@ -17,7 +17,7 @@ return new class extends Migration
             $table->char('nim')->nullable();
             $table->year('angkatan')->nullable();
             $table->string('jabatan')->nullable();
-            $table->enum('divisi', ['None', 'Website', 'Mobile', 'Internet Of Things', 'Sistem Cerdas'])->default('None');
+            $table->enum('divisi', ['None', 'Website', 'Mobile', 'Internet Of Things', 'Sistem Cerdas', 'UI/UX'])->default('None');
             $table->string('foto')->nullable();
             $table->timestamps();
         });

@@ -66,6 +66,26 @@
                                         <p>Visi | Landing page</p>
                                     </a>
                                 </li>
+                                @if (Auth::user()->role === 'Admin')
+                                    <li class="nav-item">
+                                        <a href="{{ route('testimonial.lihat') }}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Testimoni | Landing page</p>
+                                        </a>
+                                    </li>
+                                @endif
+                                <li class="nav-item">
+                                    <a href="{{ route('faq.index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>FAQ | Landing page</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('logo.index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Logo | Landing page</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 
@@ -104,12 +124,14 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('addMember') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>User | Add</p>
-                                    </a>
-                                </li>
+                                @if (Auth::user()->role === 'Admin')
+                                    <li class="nav-item">
+                                        <a href="{{ route('addMember') }}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>User | Add</p>
+                                        </a>
+                                    </li>
+                                @endif
                                 <li class="nav-item">
                                     <a href="{{ route('validate') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
@@ -153,18 +175,22 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
+                            {{-- @if (Auth::user()->role === 'Admin' || Auth::user()->role === 'Pengurus' || Auth::user()->role === 'Anggota') --}}
                             <li class="nav-item">
-                                <a href="{{ route('listuser') }}" class="nav-link">
+                                <a href="{{ route('profile.index') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Member Information</p>
+                                    <p>Profile</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ route('faqadmin') }}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>FAQ</p>
-                                </a>
-                            </li>
+                            {{-- @endif --}}
+                            @if (Auth::user()->role === 'Admin' || Auth::user()->role === 'Pengurus')
+                                <li class="nav-item">
+                                    <a href="{{ route('listuser') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Member Information</p>
+                                    </a>
+                                </li>
+                            @endif
                         </ul>
                     </li>
                 </ul>

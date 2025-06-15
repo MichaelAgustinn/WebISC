@@ -7,11 +7,11 @@
         </a>
         <nav id="navmenu" class="navmenu">
             <ul>
-                <li><a href="/landingpage?#hero" class="active">Home<br></a></li>
+                <li><a href="/landingpage?#hero">Home<br></a></li>
                 <li><a href="/landingpage?#about">About</a></li>
                 <li><a href="/landingpage?#portfolio">Portfolio</a></li>
                 <li><a href="/landingpage?#team">Team</a></li>
-                <li><a href="blog.html">Blog</a></li>
+                <li><a href="{{ route('blog.index') }}">Blog</a></li>
                 <li><a href="/landingpage?#contact">Contact</a></li>
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

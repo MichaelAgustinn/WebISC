@@ -12,43 +12,28 @@
             <div class="col-lg-12">
 
                 <div class="container">
+
                     <div class="row gy-4 justify-content-center text-center">
-                        <div class="col-md-6">
-                            <div class="info-item" data-aos="fade" data-aos-delay="200">
-                                <i class="bi bi-geo-alt"></i>
-                                <h3>Address</h3>
-                                <p>A108 Adam Street</p>
-                                <p>New York, NY 535022</p>
-                            </div>
-                        </div>
+                        @php
+                            $icon = ['bi-geo-alt', 'bi-telephone', 'bi-envelope', 'bi-clock'];
+                            $i = 0;
+                        @endphp
 
-                        <div class="col-md-6">
-                            <div class="info-item" data-aos="fade" data-aos-delay="300">
-                                <i class="bi bi-telephone"></i>
-                                <h3>Call Us</h3>
-                                <p>+1 5589 55488 55</p>
-                                <p>+1 6678 254445 41</p>
+                        @foreach ($contacts as $contact)
+                            <div class="col-md-6">
+                                <div class="info-item" data-aos="fade" data-aos-delay="200">
+                                    <i class="bi {{ $icon[$i] }}"></i>
+                                    <h3>{{ $contact->type }}</h3>
+                                    <p>{{ $contact->name }}</p>
+                                    <p>{{ $contact->value }}</p>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="info-item" data-aos="fade" data-aos-delay="400">
-                                <i class="bi bi-envelope"></i>
-                                <h3>Email Us</h3>
-                                <p>info@example.com</p>
-                                <p>contact@example.com</p>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="info-item" data-aos="fade" data-aos-delay="500">
-                                <i class="bi bi-clock"></i>
-                                <h3>Open Hours</h3>
-                                <p>Monday - Friday</p>
-                                <p>9:00AM - 05:00PM</p>
-                            </div>
-                        </div>
+                            @php
+                                $i++;
+                            @endphp
+                        @endforeach
                     </div>
+
                 </div>
 
 

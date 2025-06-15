@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Creation;
+use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +16,10 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        return view('profile.edit');
+        $data = User::with('creation')->findOrFail(Auth::user()->id);
+        // dd($data);
+        // dd($data);
+        return view('profile.edit', ['data' => $data]);
     }
     /**
      * Display the user's profile form.

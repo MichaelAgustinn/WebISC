@@ -43,20 +43,11 @@
   }
 </script>
             <div class="swiper-wrapper align-items-center">
-                <div class="swiper-slide"><img src="{{ asset('LogoIsc') }}/isc.png" class="img-fluid" alt="">
-                </div>
-                <div class="swiper-slide"><img src="{{ asset('LogoIsc') }}/web.png" class="img-fluid" alt="">
-                </div>
-                <div class="swiper-slide"><img src="{{ asset('LogoIsc') }}/mobile.png" class="img-fluid" alt="">
-                </div>
-                <div class="swiper-slide"><img src="{{ asset('LogoIsc') }}/sc.png" class="img-fluid" alt="">
-                </div>
-                <div class="swiper-slide"><img src="{{ asset('LogoIsc') }}/ux.png" class="img-fluid" alt="">
-                </div>
-                <div class="swiper-slide"><img src="{{ asset('LogoIsc') }}/tc.png" class="img-fluid" alt="">
-                </div>
-                <div class="swiper-slide"><img src="{{ asset('landingpages') }}/assets/img/clients/client-7.png"
-                        class="img-fluid" alt=""></div>
+                @foreach ($logos as $logo)
+                    <div class="swiper-slide"><img src="{{ asset('storage/' . $logo->image) }}" class="img-fluid"
+                            alt="">
+                    </div>
+                @endforeach
             </div>
             <div class="swiper-pagination"></div>
         </div>

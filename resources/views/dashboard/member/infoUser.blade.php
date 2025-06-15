@@ -56,7 +56,7 @@
                                                 </ul>
                                             </div>
                                             <div class="col-5 text-center">
-                                                <img src="{{ $iu->foto ? 'storage/' . $iu->foto : 'storage/photo_profil/default.jpg' }}"
+                                                <img src="{{ $iu->profile->foto ? 'storage/' . $iu->profile->foto : 'storage/photo_profil/default.jpg' }}"
                                                     alt="user-avatar" class="img-circle img-fluid">
                                             </div>
                                         </div>
@@ -78,18 +78,10 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    <nav aria-label="Contacts Page Navigation">
-                        <ul class="pagination justify-content-center m-0">
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item"><a class="page-link" href="#">6</a></li>
-                            <li class="page-item"><a class="page-link" href="#">7</a></li>
-                            <li class="page-item"><a class="page-link" href="#">8</a></li>
-                        </ul>
-                    </nav>
+                    <div class="d-flex justify-content-center">
+                        {{ $infouser->links() }}
+                    </div>
+
                 </div>
                 <!-- /.card-footer -->
             </div>

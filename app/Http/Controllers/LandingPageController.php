@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\Creation;
 use App\Models\Event;
 use App\Models\Faq;
 use App\Models\Landing_page_content;
+use App\Models\Logo;
+use App\Models\Testimonial;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -19,11 +22,18 @@ class LandingPageController extends Controller
     {
         $content = Landing_page_content::whereIn('section', ['hero', 'about', 'visi', 'misi', 'tujuan'])->get()->keyBy('section');
         $users = User::count();
-        $creations = Creation::count();
+        $creationCount = Creation::count();
         $pengurus = User::where('role', 'Pengurus')->count();
         $faqs = Faq::all();
         $creations = Creation::all();
         $events = Event::all();
+        $testimonials = Testimonial::with(['user.profile'])->get();
+        // $testimonials = Testimonial::all();
+        $teams = User::with('profile')->whereHas('profile', function ($query) {
+            $query->where('jabatan', 'Pembimbing');
+        })->get();
+        $logos = Logo::all();
+        $contacts = Contact::all();
         // dd($pengurus);
         return view('welcome', [
             'hero' => !empty($content['hero']) ?  $content['hero'] : null,
@@ -31,12 +41,16 @@ class LandingPageController extends Controller
             'visi' => $content['visi'] ?? null,
             'misi' => $content['misi'] ?? null,
             'tujuan' => $content['tujuan'] ?? null,
-            'cretions' => $creations,
+            'creationCount' => $creationCount,
             'users' => $users,
             'pengurus' => $pengurus,
             'faqs' => $faqs,
             'creations' => $creations,
             'events' => $events,
+            'testimonials' => $testimonials,
+            'teams' => $teams,
+            'logos' => $logos,
+            'contacts' => $contacts,
         ]);
     }
 

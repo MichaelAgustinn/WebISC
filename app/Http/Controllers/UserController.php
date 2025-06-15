@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $infouser = User::all();
+        $infouser = User::paginate(6);
         return view('dashboard.member.infoUser', ['infouser' => $infouser]);
     }
 
@@ -22,37 +25,101 @@ class UserController extends Controller
     public function storeMember(Request $request)
     {
         $user = new User;
+        $profile = Profile::find($user->id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->getPassword());
-        $user->role = $request->role;
-        $user->nim = $request->nim;
-        $user->angkatan = $request->angkatan;
-        $user->jabatan = $request->jabatan;
-        $user->divisi = $request->divisi;
+        $user->save();
+
+        $profile->role = $request->role;
+        $profile->nim = $request->nim;
+        $profile->angkatan = $request->angkatan;
+        $profile->jabatan = $request->jabatan;
+        $profile->divisi = $request->divisi;
         if ($request->hasFile('image')) {
             $user->foto = $request->file('image')->store('photo_profil', 'public');
         }
-        $user->save();
+        $profile->save();
         return redirect('/add-member')->with('success', 'Berhasil DI Tambah');
     }
 
-    public function edit(Request $request)
+    public function update(UserRequest $request, $id)
     {
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->getPassword());
-        $user->role = $request->role;
-        $user->nim = $request->nim;
-        $user->angkatan = $request->angkatan;
-        $user->jabatan = $request->jabatan;
-        $user->divisi = $request->divisi;
-        if ($request->hasFile('image')) {
-            $user->foto = $request->file('image')->store('photo_profil', 'public');
+        // Ambil user beserta relasi profile-nya
+        $user = User::with('profile')->findOrFail($id);
+
+        // Isi data user
+        $user->fill([
+            'name' => $request['name'],
+            'email' => $request['email'],
+        ]);
+
+        // Jika password ada, update password juga
+        if (!empty($request['password'])) {
+            $user->password = bcrypt($request['password']);
         }
+
+        // Simpan data user
         $user->save();
-        return redirect('/listuser')->with('success', 'Berhasil Diedit');
+
+        // Isi data profile
+        $profileData = $request['profile'] ?? [];
+
+        if ($request->hasFile('profile.image')) {
+            $oldPhoto = $user->profile->foto ?? null;
+            if (!empty($oldPhoto) && Storage::disk('public')->exists($oldPhoto)) {
+                Storage::disk('public')->delete($oldPhoto);
+            }
+
+            $profileData['foto'] = $request->file('profile.image')->store('photo_profil', 'public');
+        }
+
+        $user->profile()->updateOrCreate(
+            ['user_id' => $user->id],
+            $profileData
+        );
+        // $user = User::with('profile')->findOrFail($id);
+        // $profile = Profile::find($user->id);
+        // $user->fill($request->validated());
+        // $user->save();
+
+        // return $request->validated();
+        // dd($user);
+        // dd($request->validated());
+
+        // Update data Profile jika ada
+        // if ($user->profile) {
+        //     $user->profile->nim = $request->nim;
+        //     $user->profile->angkatan = $request->angkatan;
+        //     $user->profile->jabatan = $request->jabatan;
+        //     $user->profile->divisi = $request->divisi;
+
+        //     // Handle file upload
+        //     if ($request->hasFile('image')) {
+        //         if ($user->profile->foto && Storage::disk('public')->exists($user->profile->foto)) {
+        //             Storage::disk('public')->delete($user->profile->foto);
+        //         }
+        //         $user->profile->foto = $request->file('image')->store('photo_profil', 'public');
+        //     }
+
+        //     $user->profile->save();
+        // }
+        // dd($user);
+
+        // $user->name = $validatedData['name'];
+        // $user->email = $validatedData['email'];
+        // $user->password = !empty($validatedData['password']) ? bcrypt($validatedData['password']) : $user->password;
+        // $user->role = $validatedData['role'];
+
+        // $profile->nim = $validatedData['nim'];
+        // $profile->angkatan = $validatedData['angkatan'];
+        // $profile->jabatan = $validatedData['jabatan'];
+        // $profile->divisi = $validatedData['divisi'];
+
+
+        // $profile->save();
+
+        return redirect()->route('profile.index')->with('success', 'Berhasil Diedit');
     }
 
     public function validate()

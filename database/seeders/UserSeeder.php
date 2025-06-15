@@ -38,7 +38,52 @@ class UserSeeder extends Seeder
                 'email' => 'ketua@gmail.com',
                 'password' => bcrypt('1234'),
                 'role' => 'Pengurus',
-            ]
+            ],
+            [
+                'name' => 'Sugirato Cokrowibowo',
+                'email' => 'sugiratocokrowibowo@example.com',
+                'password' => bcrypt('1234'),
+                'role' => 'Pengurus',
+            ],
+            [
+                'name' => 'Muh. Fahmi Rustan',
+                'email' => 'fahmi@example.com',
+                'password' => bcrypt('1234'),
+                'role' => 'Pengurus',
+            ],
+            [
+                'name' => 'Rafly Rasyid',
+                'email' => 'rafly@example.com',
+                'password' => bcrypt('1234'),
+                'role' => 'Pengurus',
+            ],
+            [
+                'name' => 'Nuralamsah Zulkarnaim',
+                'email' => 'nuralamsah@example.com',
+                'password' => bcrypt('1234'),
+                'role' => 'Pengurus',
+            ],
+            [
+                'name' => 'Farid Wajidi',
+                'email' => 'farid@example.com',
+                'password' => bcrypt('1234'),
+                'role' => 'Pengurus',
+            ],
+            [
+                'name' => 'Wawan Firgiawan',
+                'email' => 'wawan@example.com',
+                'password' => bcrypt('1234'),
+                'role' => 'Pengurus',
+            ],
+
+            [
+                'name' => 'Andi Amirul Asnan Cirua',
+                'email' => 'amirul@example.com',
+                'password' => bcrypt('1234'),
+                'role' => 'Pengurus',
+            ],
+
+
         ]);
     }
 }

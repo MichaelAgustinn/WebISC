@@ -6,7 +6,7 @@
                 <div class="stats-item d-flex align-items-center w-100 h-100">
                     <i class="bi bi-journal-richtext color-orange flex-shrink-0" style="color: #ee6c20;"></i>
                     <div>
-                        <span data-purecounter-start="0" data-purecounter-end="{{ $creations ?? '' }}"
+                        <span data-purecounter-start="0" data-purecounter-end="{{ $creationCount ?? '' }}"
                             data-purecounter-duration="1" class="purecounter"></span>
                         <p>Total Karya</p>
                     </div>

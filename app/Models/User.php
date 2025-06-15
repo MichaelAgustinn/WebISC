@@ -42,6 +42,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Event::class)->withPivot('is_verified')->withTimestamps();
     }
 
+    public function testimonial()
+    {
+        return $this->hasOne(Testimonial::class);
+    }
+
 
     /**
      * The attributes that are mass assignable.
