@@ -16,11 +16,11 @@
 
 ## 🧑‍🤝‍🧑 Role dan Hak Akses
 
-| Role         | Akses                                                                              |
-| ------------ | ---------------------------------------------------------------------------------- |
-| **Anggota**  | Akses landing page + Mengunggah karya                                              |
-| **Pengurus** | Semua akses Anggota + Kelola anggota, testimoni, log aktivitas, bisa approve karya |
-| **Admin**    | Semua akses Pengurus + Kelola user dan landing page                                |
+| Role         | Akses                                                                                               |
+| ------------ | --------------------------------------------------------------------------------------------------- |
+| **Anggota**  | Akses landing page + Mengunggah karya                                                               |
+| **Pengurus** | Semua akses Anggota + Kelola anggota, testimoni, log aktivitas, bisa approve karya dan landing page |
+| **Admin**    | Semua akses Pengurus + Kelola user dan testimonial                                                  |
 
 ---
 
