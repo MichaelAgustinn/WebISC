@@ -6,12 +6,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Tambah Blog</h1>
+                        <h1>Edit Blog</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Tambah Blog</li>
+                            <li class="breadcrumb-item active">Edit Blog</li>
                         </ol>
                     </div>
                 </div>
@@ -22,17 +22,20 @@
         @elseif (session('error'))
             <div class="alert bg-danger">{{ session('error') }}</div>
         @endif
+
         <!-- Main content -->
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
                     <!-- Form untuk menyimpan data -->
-                    <form action="{{ route('blog.store') }}" method="POST">
+                    <form action="{{ route('blog.update', $data->id) }}" method="POST">
                         @csrf
+                        @method('PUT')
                         <!-- Judul -->
                         <div class="form-group">
                             <label for="title">Judul</label>
-                            <input type="text" name="title" class="form-control" required value="{{ old('title') }}">
+                            <input type="text" name="title" class="form-control" required
+                                value="{{ old('title', $data->title) }}">
                             @error('title')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -41,7 +44,7 @@
                         <!-- Summernote Description -->
                         <div class="form-group">
                             <label for="summernote">Deskripsi</label>
-                            <textarea id="summernote" name="description">{{ old('description') }}</textarea>
+                            <textarea id="summernote" name="description">{{ old('description', $data->description) }}</textarea>
                             @error('description')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror

@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $infouser = User::paginate(6);
+        $infouser = User::with('profile')->paginate(6);
         return view('dashboard.member.infoUser', ['infouser' => $infouser]);
     }
 
@@ -45,24 +45,19 @@ class UserController extends Controller
 
     public function update(UserRequest $request, $id)
     {
-        // Ambil user beserta relasi profile-nya
         $user = User::with('profile')->findOrFail($id);
 
-        // Isi data user
         $user->fill([
             'name' => $request['name'],
             'email' => $request['email'],
         ]);
 
-        // Jika password ada, update password juga
         if (!empty($request['password'])) {
             $user->password = bcrypt($request['password']);
         }
 
-        // Simpan data user
         $user->save();
 
-        // Isi data profile
         $profileData = $request['profile'] ?? [];
 
         if ($request->hasFile('profile.image')) {
@@ -116,7 +111,6 @@ class UserController extends Controller
         // $profile->jabatan = $validatedData['jabatan'];
         // $profile->divisi = $validatedData['divisi'];
 
-
         // $profile->save();
 
         return redirect()->route('profile.index')->with('success', 'Berhasil Diedit');
@@ -135,5 +129,12 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->back()->with('success', ($user->name . ' Diverifikasi.'));
+    }
+
+    public function destroy($id)
+    {
+        $data = User::find($id);
+        $data->delete();
+        return redirect()->back()->with('success', ($data->name . ' Dihapus.'));
     }
 }

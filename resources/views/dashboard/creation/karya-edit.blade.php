@@ -42,12 +42,12 @@
                                     <div class="form-group">
                                         <label for="section">Judul</label>
                                         <input type="text" class="form-control" id="section" name="title"
-                                            placeholder="judul">
+                                            placeholder="judul" value="{{ $creation->title }}">
                                     </div>
                                     <div class="form-group dropdown">
                                         <label for="content">Deskripsi</label>
                                         <input type="text" class="form-control" id="section" placeholder="deskripsi"
-                                            name="description">
+                                            name="description" value="{{ $creation->description }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputFile">Foto Karya</label>
@@ -63,15 +63,22 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @if ($creation && $creation->image_path)
+                                        <div class="form-group">
+                                            <img src="{{ asset('storage/' . $creation->image_path) }}" alt="test"
+                                                width="200px" height="auto"
+                                                style="object-fit: cover; border-radius: 8px;" />
+                                        </div>
+                                    @endif
 
                                     <div class="form-group dropdown">
                                         <label for="jabatan">Anggota</label>
                                         <select class="form-control" id="role" name="user_ids[]" multiple>
-                                            @foreach ($user as $u)
-                                                @if ($u->role != 'Admin')
-                                                    <option value="{{ $u->id }}">{{ $u->name }} |
-                                                        {{ $u->profile->nim }}</option>
-                                                @endif
+                                            @foreach ($users as $u)
+                                                <option value="{{ $u->id }}"
+                                                    {{ in_array($u->id, $selectedUserIds) ? 'selected' : '' }}>
+                                                    {{ $u->name }} | {{ $u->profile->nim }}
+                                                </option>
                                             @endforeach
                                         </select>
                                         <small class="text-muted">Tekan Ctrl (atau Cmd di Mac) untuk pilih lebih dari satu
@@ -81,13 +88,21 @@
                                     <div class="form-group dropdown">
                                         <label for="jabatan">Divisi</label>
                                         <select class="form-control" id="role" name="divisi">
-                                            <option value="None">None</option>
-                                            <option value="Mobile">Mobile</option>
-                                            <option value="Website">Website</option>
-                                            <option value="SistemCerdas">Sistem Cerdas</option>
-                                            <option value="IoT">Internet Of Things</option>
+                                            <option value="None" {{ $creation->divisi == 'None' ? 'selected' : '' }}>None
+                                            </option>
+                                            <option value="Mobile" {{ $creation->divisi == 'Mobile' ? 'selected' : '' }}>
+                                                Mobile</option>
+                                            <option value="Website" {{ $creation->divisi == 'Website' ? 'selected' : '' }}>
+                                                Website</option>
+                                            <option value="SistemCerdas"
+                                                {{ $creation->divisi == 'Sistem Cerdas' ? 'selected' : '' }}>Sistem Cerdas
+                                            </option>
+                                            <option value="IoT"
+                                                {{ $creation->divisi == 'Internet Of Things' ? 'selected' : '' }}>Internet
+                                                Of Things</option>
                                         </select>
                                     </div>
+
                                 </div>
 
                                 <div class="card-footer">

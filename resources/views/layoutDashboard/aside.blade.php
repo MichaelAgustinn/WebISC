@@ -86,6 +86,12 @@
                                         <p>Logo | Landing page</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('contact.create') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Contact | Landing page</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 
@@ -100,13 +106,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('editor') }}" class="nav-link">
+                                    <a href="{{ route('blog.create') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Blog | Tambah</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ route('blog.lihat') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Blog | Lihat</p>
                                     </a>
@@ -158,7 +164,13 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ route('karya.validate') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Verifikasi Karya</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('karya.total') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Lihat Karya</p>
                                     </a>

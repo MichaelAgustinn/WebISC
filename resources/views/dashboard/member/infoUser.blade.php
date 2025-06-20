@@ -37,9 +37,15 @@
                                                 <h2 class="lead"><b>{{ $iu->name }}</b></h2>
                                                 <p class="text-muted text-sm"><b>Divisi: </b>{{ $iu->divisi }}</p>
                                                 <ul class="ml-4 mb-0 fa-ul text-muted">
-                                                    <li class="small"><span class="fa-li"><i
-                                                                class="fas fa-lg fa-id-card"></i></span> <b>NIM: </b>
-                                                        {{ $iu->nim }} </li>
+                                                    @if ($iu->profile->jabatan == 'Pembimbing')
+                                                        <li class="small"><span class="fa-li"><i
+                                                                    class="fas fa-lg fa-id-card"></i></span> <b>NIDN: </b>
+                                                            {{ $iu->nim }} </li>
+                                                    @else
+                                                        <li class="small"><span class="fa-li"><i
+                                                                    class="fas fa-lg fa-id-card"></i></span> <b>NIM: </b>
+                                                            {{ $iu->nim }} </li>
+                                                    @endif
                                                     <li class="small"><span class="fa-li"><i
                                                                 class="fas fa-lg fa-calendar-alt"></i></span> <b>Angkatan:
                                                         </b>
@@ -63,11 +69,9 @@
                                     </div>
                                     <div class="card-footer">
                                         <div class="text-right">
-                                            <a href="#" class="btn btn-sm bg-teal">
-                                                <i class="fas fa-comments"></i>
-                                            </a>
-                                            <a href="#" class="btn btn-sm btn-primary">
-                                                <i class="fas fa-user"></i> View Profile
+                                            <a href="{{ route('user.delete', $iu->id) }}" class="btn btn-sm btn-danger"
+                                                onclick="return confirm('Apakah kamu yakin ingin menghapus user ini?')">
+                                                <i class="fas fa-user"></i> Delete User
                                             </a>
                                         </div>
                                     </div>

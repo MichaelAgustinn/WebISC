@@ -9,7 +9,7 @@
             <ul>
                 <li><a href="/landingpage?#hero">Home<br></a></li>
                 <li><a href="/landingpage?#about">About</a></li>
-                <li><a href="/landingpage?#portfolio">Portfolio</a></li>
+                <li><a href="/landingpage?#portfolio">Creations</a></li>
                 <li><a href="/landingpage?#team">Team</a></li>
                 <li><a href="{{ route('blog.index') }}">Blog</a></li>
                 <li><a href="/landingpage?#contact">Contact</a></li>

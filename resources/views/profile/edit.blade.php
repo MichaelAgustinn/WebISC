@@ -122,15 +122,22 @@
                             </div><!-- /.card-header -->
                             <div>
                                 <div class="card-body">
-                                    <a href="" class="btn btn-primary">Tambah Karya</a>
-                                    <a href="" class="btn btn-warning">Lihat Semua Karya</a>
+                                    @if (Auth::user()->role !== 'None')
+                                        <a href="{{ route('karya.lihat') }}" class="btn btn-success">Tambah Karya</a>
+                                        <a href="" class="btn btn-primary">Lihat Semua Karya</a>
+                                    @endif
                                 </div>
+                                @if (session('success'))
+                                    <div class="alert alert-success">{{ session('success') }}</div>
+                                @elseif (session('failed'))
+                                    <div class="alert alert-danger">{{ session('failed') }}</div>
+                                @endif
                             </div>
                             <div class="card-body">
                                 <div class="tab-content">
                                     <div class="active tab-pane" id="activity">
                                         <!-- Post -->
-                                        @foreach ($data->creation as $creation)
+                                        @foreach ($creations as $creation)
                                             <div class="post clearfix">
                                                 <div class="user-block">
                                                     <img class="img-circle img-bordered-sm"
@@ -151,11 +158,19 @@
                                                         style="max-width: 300px" alt="">
 
                                                 </div>
-                                                <a href="" class="btn btn-primary">Edit</a>
+                                                <a href="{{ route('karya.edit', $creation->id) }}"
+                                                    class="btn btn-warning">Edit</a>
+                                                <a href="{{ route('karya.delete', $creation->id) }}"
+                                                    class="btn btn-danger">Delete</a>
                                             </div>
                                         @endforeach
+
                                         <!-- /.post -->
                                     </div>
+                                    <div class="d-flex justify-content-center ">
+                                        {{ $creations->links() }}
+                                    </div>
+
 
                                     <div class="tab-pane" id="settings">
                                         <form class="form-horizontal"

@@ -16,10 +16,15 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        $data = User::with('creation')->findOrFail(Auth::user()->id);
+        $data = User::findOrFail(Auth::user()->id);
+        $creations = Creation::with('user')
+            ->whereHas('user', function ($query) {
+                $query->where('users.id', Auth::id());
+            })
+            ->latest()
+            ->paginate(3);
         // dd($data);
-        // dd($data);
-        return view('profile.edit', ['data' => $data]);
+        return view('profile.edit', ['data' => $data, 'creations' => $creations]);
     }
     /**
      * Display the user's profile form.

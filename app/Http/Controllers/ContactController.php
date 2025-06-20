@@ -10,7 +10,6 @@ class ContactController extends Controller
     public function create()
     {
         $data = Contact::whereIn('type', ['Email', 'Address', 'Phone', 'Open Hours'])->get()->keyBy('type');
-        // dd($data);
         return view('dashboard.contact.contact', [
             'email' => !empty($data['Email']) ?  $data['Email'] : null,
             'address' => $data['Address'] ?? null,

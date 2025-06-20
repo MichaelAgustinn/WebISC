@@ -15,22 +15,24 @@
 
                     <div class="row gy-4 justify-content-center text-center">
                         @php
-                            $icon = ['bi-geo-alt', 'bi-telephone', 'bi-envelope', 'bi-clock'];
-                            $i = 0;
+                            $icon = [
+                                'Address' => 'bi-geo-alt',
+                                'Phone' => 'bi-telephone',
+                                'Email' => 'bi-envelope',
+                                'Open Hours' => 'bi-clock',
+                            ];
+                            // $i = 0;
                         @endphp
 
                         @foreach ($contacts as $contact)
                             <div class="col-md-6">
                                 <div class="info-item" data-aos="fade" data-aos-delay="200">
-                                    <i class="bi {{ $icon[$i] }}"></i>
+                                    <i class="bi {{ $icon[$contact->type] }}"></i>
                                     <h3>{{ $contact->type }}</h3>
                                     <p>{{ $contact->name }}</p>
                                     <p>{{ $contact->value }}</p>
                                 </div>
                             </div>
-                            @php
-                                $i++;
-                            @endphp
                         @endforeach
                     </div>
 

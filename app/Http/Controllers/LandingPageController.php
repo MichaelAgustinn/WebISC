@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Contact;
 use App\Models\Creation;
 use App\Models\Event;
@@ -25,15 +26,15 @@ class LandingPageController extends Controller
         $creationCount = Creation::count();
         $pengurus = User::where('role', 'Pengurus')->count();
         $faqs = Faq::all();
-        $creations = Creation::all();
+        $creations = Creation::where('status', 'approve')->latest()->paginate(6);
         $events = Event::all();
         $testimonials = Testimonial::with(['user.profile'])->get();
-        // $testimonials = Testimonial::all();
         $teams = User::with('profile')->whereHas('profile', function ($query) {
             $query->where('jabatan', 'Pembimbing');
         })->get();
         $logos = Logo::all();
         $contacts = Contact::all();
+        $blogs = Blog::with('user')->latest()->take(3)->get();
         // dd($pengurus);
         return view('welcome', [
             'hero' => !empty($content['hero']) ?  $content['hero'] : null,
@@ -51,6 +52,7 @@ class LandingPageController extends Controller
             'teams' => $teams,
             'logos' => $logos,
             'contacts' => $contacts,
+            'blogs' => $blogs,
         ]);
     }
 

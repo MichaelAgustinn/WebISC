@@ -14,13 +14,22 @@ class CreationController extends Controller
 {
     public function index()
     {
-        $user = User::all();
-        return view('dashboard.creation.karya', ['user' => $user]);
+        $users = User::with('profile')->where('role', '!=', 'Admin')->get();
+        return view('dashboard.creation.karya', ['user' => $users]);
+    }
+
+    public function total()
+    {
+        $data = Creation::with('user')->get();
+        return view('dashboard.creation.karya-total', ['data' => $data]);
     }
 
     public function detail($id)
     {
         $data = Creation::find($id);
+        if (!$data || $data->status !== 'approve') {
+            abort(404);
+        }
         return view('detail-creation', ['data' => $data]);
     }
 
@@ -39,7 +48,6 @@ class CreationController extends Controller
             $data->title = $request->title;
             $data->description = $request->description;
 
-            // Simpan gambar (kalau ada), dan catat path-nya
             if ($request->hasFile('image')) {
                 $data->image_path = $request->file('image')->store('landing_page_image', 'public');
             }
@@ -47,12 +55,9 @@ class CreationController extends Controller
             $data->divisi = $request->divisi;
             $data->save();
 
-            // Tambahkan pembuat + user lainnya ke relasi
             $allUserIds = $request->user_ids ? $request->user_ids : [];
             $allUserIds[] = Auth::id();
             $data->User()->attach($allUserIds);
-
-            // Commit transaksi jika semua berhasil
             DB::commit();
 
             return redirect()->route('karya.lihat')->with('success', 'Karya berhasil diunggah');
@@ -67,5 +72,45 @@ class CreationController extends Controller
         }
     }
 
-    public function destroy() {}
+    public function edit($id)
+    {
+        $creation = Creation::with('user')->find($id);
+        $selectedUserIds = [];
+
+        if ($creation && $creation->users) {
+            $selectedUserIds = $creation->users->pluck('id')->toArray();
+        }
+        $users = User::with('profile')->where('role', '!=', 'Admin')->get();
+
+        return view('dashboard.creation.karya-edit', compact('creation', 'users', 'selectedUserIds'));
+    }
+
+    public function destroy($id)
+    {
+        $data = Creation::find($id);
+        $data->delete();
+        return redirect()->back()->with('success', 'Data berhasil dihapus');
+    }
+
+    public function validated($id)
+    {
+        $data = Creation::find($id);
+        $data->status = 'approve';
+        $data->save();
+        return redirect()->back()->with('success', ($data->title . ' Diverifikasi.'));
+    }
+
+    public function unvalidated($id)
+    {
+        $data = Creation::find($id);
+        $data->status = 'rejected';
+        $data->save();
+        return redirect()->back()->with('success', ($data->title . ' Diverifikasi.'));
+    }
+
+    public function validate()
+    {
+        $data = Creation::where('status', 'pending')->get();
+        return view('dashboard.creation.karya-validate', ['data' => $data]);
+    }
 }

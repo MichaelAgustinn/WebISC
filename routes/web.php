@@ -10,15 +10,23 @@ use App\Http\Controllers\LogoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\UserController;
+use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::redirect('/', '/landingpage');
 
+Route::get('/testings', function () {
+    $tes = Blog::where('slug', 'testing-lagi-1750345105')->first();
+    dd($tes->first_image);
+});
+
 Route::get('/landingpage', [LandingPageController::class, 'index'])->name('landingpage.index');
 
-Route::get('/blogs', [BlogController::class, 'index'])->name('blog.index');
-Route::get('/blog', [BlogController::class, 'detail'])->name('blog.detail');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{slug}', [BlogController::class, 'detail'])->name('blog.detail');
+
+Route::get('/detail/karya/{id}', [CreationController::class, 'detail'])->name('karya.detail');
+
 
 Route::middleware('auth', 'role:Admin,Pengurus')->group(function () {
     Route::resource('landingpage', LandingPageController::class)->except(['index']);
@@ -33,6 +41,7 @@ Route::middleware('auth', 'role:Admin,Pengurus')->group(function () {
     Route::put('/faq/update/{id}', [FaqController::class, 'update'])->name('faq.update');
     Route::get('/faq/delete/{id}', [FaqController::class, 'destroy'])->name('faq.delete');
 
+    Route::get('/user/delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
     Route::get('/listuser', [UserController::class, 'index'])->name('listuser');
     Route::get('/validate-member', [UserController::class, 'validate'])->name('validate');
     Route::patch('/validate-member-true/{id}', [UserController::class, 'validated'])->name('validated');
@@ -44,9 +53,21 @@ Route::middleware('auth', 'role:Admin,Pengurus')->group(function () {
     Route::put('/logo-divisi/update/{id}', [LogoController::class, 'update'])->name('logo.update');
     Route::get('/logo-divisi/delete/{id}', [LogoController::class, 'destroy'])->name('logo.delete');
 
-    Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
+    Route::get('/contact/create', [ContactController::class, 'create'])->name('contact.create');
     Route::post('/contact/submit', [ContactController::class, 'store'])->name('contact.store');
     Route::put('/contact/update/{id}', [ContactController::class, 'update'])->name('contact.update');
+
+    Route::get('/blogs', [BlogController::class, 'lihat'])->name('blog.lihat');
+    Route::get('/blog/create/new', [BlogController::class, 'create'])->name('blog.create');
+    Route::post('/blog/store', [BlogController::class, 'store'])->name('blog.store');
+    Route::get('/blog/{id}/edit', [BlogController::class, 'edit'])->name('blog.edit');
+    Route::put('/blog/{id}/update', [BlogController::class, 'update'])->name('blog.update');
+    Route::get('/blog/{id}/delete', [BlogController::class, 'destroy'])->name('blog.delete');
+
+    Route::patch('/karya/{id}/validated', [CreationController::class, 'validated'])->name('karya.validated');
+    Route::patch('/karya/{id}/unvalidated', [CreationController::class, 'unvalidated'])->name('karya.unvalidated');
+    Route::get('/karya/validate', [CreationController::class, 'validate'])->name('karya.validate');
+    Route::get('/karya/lihat/all', [CreationController::class, 'total'])->name('karya.total');
 });
 
 Route::middleware('auth', 'role:Admin')->group(function () {
@@ -61,20 +82,21 @@ Route::middleware('auth', 'role:Admin')->group(function () {
     Route::post('/add-member/store', [UserController::class, 'storeMember'])->name('storeMember');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/editor', function () {
-        return view('dashboard.blog.editor');
-    })->name('editor');
+Route::middleware('auth', 'role:Anggota,Admin,Pengurus')->group(function () {
+    Route::get('/karya', [CreationController::class, 'index'])->name('karya.lihat');
+    Route::PUT('/karya/submit', [CreationController::class, 'store'])->name('karya.submit');
+    Route::get('/karya/edit/{id}', [CreationController::class, 'edit'])->name('karya.edit');
+    Route::get('/karya/delete/{id}', [CreationController::class, 'destroy'])->name('karya.delete');
+});
 
+
+Route::middleware('auth')->group(function () {
     Route::post('/user/update/profile/{id}', [UserController::class, 'update'])->name('user.update');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/karya', [CreationController::class, 'index'])->name('karya.lihat');
-    Route::PUT('/karya/submit', [CreationController::class, 'store'])->name('karya.submit');
-    Route::get('/detail/karya/{id}', [CreationController::class, 'detail'])->name('karya.detail');
-
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
