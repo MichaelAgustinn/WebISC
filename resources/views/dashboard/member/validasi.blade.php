@@ -52,11 +52,11 @@
                                                 <td>{{ $unver->id }}</td>
                                                 <td>{{ $unver->name }}</td>
                                                 <td>{{ $unver->email }}</td>
-                                                <td>{{ $unver->nim }}</td>
-                                                <td>{{ $unver->angkatan }}</td>
-                                                <td>{{ $unver->jabatan }}</td>
+                                                <td>{{ $unver->profile->nim }}</td>
+                                                <td>{{ $unver->profile->angkatan }}</td>
+                                                <td>{{ $unver->profile->jabatan }}</td>
                                                 <td>
-                                                    <img src="{{ $unver->foto ? 'storage/' . $unver->foto : 'storage/photo_profil/default.jpg' }}"
+                                                    <img src="{{ $unver->profile->foto ? asset('storage/' . $unver->profile->foto) : asset('storage/photo_profil/default.jpg') }}"
                                                         width="100" height="100" style="object-fit: cover;"
                                                         alt="foto profil">
                                                 </td>
