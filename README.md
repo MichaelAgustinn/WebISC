@@ -33,6 +33,10 @@ Berisi data user dan peran di sistem.
 -   Relasi: `hasOne` ke `profiles`, `hasMany` ke `blogs`, `creations`, `activity_logs`
 -   Role: None, Anggota, Pengurus, Admin
 
+### 🔐 Tabel `profiles`
+
+Berisi data diri user.
+
 ### 🎨 Tabel `creations`
 
 Berisi karya yang diunggah oleh anggota.
@@ -84,6 +88,7 @@ Berisi info kontak seperti email, alamat, nomor telepon, dan jam buka.
 | Tabel Asal | Tabel Tujuan     | Relasi       | Penjelasan                                    |
 | ---------- | ---------------- | ------------ | --------------------------------------------- |
 | users      | blogs            | one-to-many  | Satu user dapat membuat banyak blog           |
+| users      | profile          | one-to-one   | Satu user mempunyai satu profile              |
 | users      | activity_logs    | one-to-many  | Aktivitas dicatat per user                    |
 | users      | member_creations | one-to-many  | Satu user dapat memiliki banyak member karya  |
 | creations  | member_creations | one-to-many  | Satu karya dapat memiliki banyak member karya |
