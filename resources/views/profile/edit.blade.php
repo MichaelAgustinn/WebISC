@@ -38,7 +38,7 @@
                                 <div class="text-center">
                                     <a href="" class="photo-profile">
                                         <img class="profile-user-img img-fluid img-circle "
-                                            src="{{ asset(Auth::user()->profile->foto ? 'storage/' . Auth::user()->profile->foto : 'storage/photo_profil/default.jpg') }}"
+                                            src="{{ asset(Auth::user()->profile->foto ? 'storage/' . Auth::user()->profile->foto : 'profile-default.jpg') }}"
                                             alt="User profile pictures">
                                     </a>
                                 </div>

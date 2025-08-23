@@ -175,7 +175,7 @@
                     <div class="team-member">
                         {{-- <div> --}}
                         <img src="{{ asset('storage/' . $member->profile->foto) }}" class="img-fluid"
-                            alt="{{ $member->name }}" style="max-height: 300px">
+                            alt="{{ $member->name }}" style="max-height: 300px; max-width: 300px;">
                         {{-- </div> --}}
                         <div class="member-info">
                             <h4>{{ $member->name }}</h4>

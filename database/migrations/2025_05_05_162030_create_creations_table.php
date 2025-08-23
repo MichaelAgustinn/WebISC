@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
+            $table->string('image_path');
             $table->enum('divisi', ['Mobile', 'Website', 'IoT', 'UIUX', 'SistemCerdas']);
             $table->enum('status', ['pending', 'approve', 'rejected'])->default('pending');
             $table->timestamps();

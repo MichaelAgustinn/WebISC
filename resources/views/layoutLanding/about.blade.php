@@ -8,17 +8,17 @@
                     <p>
                         {{ $about->content ?? '' }}
                     </p>
-                    <div class="text-center text-lg-start">
+                    {{-- <div class="text-center text-lg-start">
                         <a href="#"
                             class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
                             <span>Read More</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
-            <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
+            <div class="col-lg-6 d-flex align-items-center " data-aos="zoom-out" data-aos-delay="200">
                 <img src="{{ asset('storage/' . (!empty($about->foto) ? $about->foto : '')) }} " class="img-fluid"
                     alt="">
             </div>

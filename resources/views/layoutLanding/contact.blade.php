@@ -1,12 +1,12 @@
 <section id="contact" class="contact section">
 
     <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
+    <div class="container section-title" data-aos="">
         <h2>Contact</h2>
         <p>Contact Us</p>
     </div><!-- End Section Title -->
 
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="container" data-aos="" data-aos-delay="100">
 
         <div class="row gy-4">
             <div class="col-lg-12">
@@ -26,7 +26,7 @@
 
                         @foreach ($contacts as $contact)
                             <div class="col-md-6">
-                                <div class="info-item" data-aos="fade" data-aos-delay="200">
+                                <div class="info-item" data-aos="   " data-aos-delay="200">
                                     <i class="bi {{ $icon[$contact->type] }}"></i>
                                     <h3>{{ $contact->type }}</h3>
                                     <p>{{ $contact->name }}</p>

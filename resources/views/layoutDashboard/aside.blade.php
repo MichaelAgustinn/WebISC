@@ -12,7 +12,7 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="{{ asset(Auth::user()->profile->foto ? 'storage/' . Auth::user()->profile->foto : 'storage/photo_profil/default.jpg') }}"
+                    <img src="{{ asset(Auth::user()->profile->foto ? 'storage/' . Auth::user()->profile->foto : 'profile-default.jpg') }}"
                         class="img-circle elevation-2" alt="profil">
                 </div>
                 <div class="info">
