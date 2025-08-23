@@ -17,7 +17,7 @@ class CreationSeeder extends Seeder
             [
                 'title' => 'Website',
                 'description' => 'Web Desa',
-                'image_path' => 'creation/webdesa.png',
+                'image_path' => 'creation/website.png',
                 'divisi' => 'Website',
                 'status' => 'approve',
                 'created_at' => now(),
@@ -35,7 +35,7 @@ class CreationSeeder extends Seeder
             [
                 'title' => 'Alat Berbasis IoT',
                 'description' => 'Alat Berbasis Internet Of Things',
-                'image_path' => 'creation/iot.jpeg',
+                'image_path' => 'creation/iot.png',
                 'divisi' => 'IoT',
                 'status' => 'approve',
                 'created_at' => now(),
