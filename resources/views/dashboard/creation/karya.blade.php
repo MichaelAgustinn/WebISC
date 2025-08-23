@@ -93,14 +93,15 @@
                                             anggota</small>
                                     </div> --}}
                                     <div class="form-group">
-                                        <label for="searchBox">Cari Nama Anggota</label>
+                                        <label for="searchBox">Cari Nama Anggota</label> <small class="text-muted">(Tekan
+                                            Ctrl (atau Cmd di Mac) untuk pilih
+                                            anggota)</small>
                                         <input type="text" id="searchBox" class="form-control mb-2"
                                             placeholder="Ketik nama...">
                                     </div>
                                     <div class="form-group">
-                                        <label for="userSelect">Pilih Anggota</label>
-                                        <small class="text-muted">(Tekan Ctrl (atau Cmd di Mac) untuk pilih
-                                            anggota)</small>
+                                        {{-- <label for="userSelect">Pilih Anggota</label> --}}
+
                                         <select id="userSelect" class="form-control" multiple style="width: 100%;">
                                             @foreach ($user as $u)
                                                 @if ($u->role !== 'Admin')
