@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             FaqSeeder::class,
             CreationSeeder::class,
+            VotingSeeder::class,
         ]);
 
         CreationUser::insert([

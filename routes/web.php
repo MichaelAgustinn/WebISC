@@ -10,6 +10,7 @@ use App\Http\Controllers\LogoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VotingController;
 use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
 
@@ -101,6 +102,14 @@ Route::middleware('auth')->group(function () {
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+Route::get('/voted/{nama}', [VotingController::class, 'voting'])->name('voted');
+Route::get('/voting-login', [VotingController::class, 'login'])->name('voting.login');
+Route::post('/voting-login-code', [VotingController::class, 'postLogin'])->name('voting.codeLogin');
+Route::get('/voting', [VotingController::class, 'index'])->name('voting')->middleware('votingAuth');
+Route::get('/hasil-voting', [VotingController::class, 'showResults']);
+Route::get('/cetak-voting', [VotingController::class, 'cetak'])->name('cetak.voting');
 
 Route::get('uy', function () {
     return 'MASUK MASS';
