@@ -1,4 +1,5 @@
 @extends('layoutDashboard.master')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
 
 <style>
     .content-wrapper {
@@ -239,8 +240,8 @@
                                                 <div class="input-group">
                                                     <div class="custom-file">
                                                         <input type="file" accept="image/*" class="custom-file-input"
-                                                            id="gambar-landing-page" name="profile[image]">
-                                                        <label class="custom-file-label" for="gambar-landingpage">Choose
+                                                            id="gambar-landing-page">
+                                                        <label class="custom-file-label" for="gambar-landing-page">Choose
                                                             file</label>
                                                     </div>
                                                     <div class="input-group-append">
@@ -248,24 +249,19 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            @if (!empty($data->profile->foto))
-                                                <div class="form-group photo-profile">
-                                                    {{-- <img src="{{ asset('storage/photo_profil/default.jpg') }}" alt="test"
-                                                    width="300" height="300"
-                                                    class="profile-user-img img-fluid img-circle"
-                                                    style="object-fit: cover;" /> --}}
-                                                    <img src="{{ asset('storage/' . $data->profile->foto) }}"
-                                                        alt="test" width="300" height="300"
-                                                        class="profile-user-img img-fluid img-circle"
-                                                        style="object-fit: cover;" />
-                                                </div>
-                                            @endif
-                                            <div class="form-group row">
-                                                <div class="offset-sm-2 col-sm-10 d-flex justify-content-end">
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                </div>
+
+                                            {{-- Tempat preview cropper --}}
+                                            <div class="form-group" style="max-width: 200px">
+                                                <img id="preview"
+                                                    style="max-width:200px; display:none;max-height: auto">
                                             </div>
 
+                                            {{-- Hidden input buat hasil crop --}}
+                                            <input type="hidden" name="profile[image]" id="imageCropped">
+
+                                            <div class="offset-sm-2 col-sm-10 d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -276,6 +272,50 @@
             </div>
         </section>
     </div>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+
+    <script>
+        let cropper;
+        const input = document.getElementById('gambar-landing-page');
+        const preview = document.getElementById('preview');
+        const imageCropped = document.getElementById('imageCropped');
+        const form = document.querySelector('form.form-horizontal');
+
+        // saat pilih gambar
+        input.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                preview.src = event.target.result;
+                preview.style.display = "block";
+
+                if (cropper) cropper.destroy();
+
+                cropper = new Cropper(preview, {
+                    aspectRatio: 1,
+                    viewMode: 1,
+                });
+            }
+            reader.readAsDataURL(file);
+        });
+
+        // sebelum submit form
+        form.addEventListener('submit', function(e) {
+            if (cropper) {
+                const canvas = cropper.getCroppedCanvas({
+                    width: 300,
+                    height: 300
+                });
+                imageCropped.value = canvas.toDataURL("image/jpeg", 0.9);
+
+                console.log("Base64 ready:", imageCropped.value.substring(0, 50)); // debug
+            }
+        });
+    </script>
 @endsection
 <!-- AdminLTE App -->
 <script src="{{ asset('admin') }}/dist/js/adminlte.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>

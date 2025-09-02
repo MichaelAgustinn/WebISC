@@ -79,19 +79,6 @@
                                         </div>
                                     </div>
 
-                                    {{-- <div class="form-group dropdown">
-                                        <label for="jabatan">Anggota</label>
-                                        <select class="form-control" id="role" name="user_ids[]" multiple>
-                                            @foreach ($user as $u)
-                                                @if ($u->role != 'Admin')
-                                                    <option value="{{ $u->id }}">{{ $u->name }} |
-                                                        {{ $u->profile->nim }}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                        <small class="text-muted">Tekan Ctrl (atau Cmd di Mac) untuk pilih lebih dari satu
-                                            anggota</small>
-                                    </div> --}}
                                     <div class="form-group">
                                         <label for="searchBox">Cari Nama Anggota</label> <small class="text-muted">(Tekan
                                             Ctrl (atau Cmd di Mac) untuk pilih

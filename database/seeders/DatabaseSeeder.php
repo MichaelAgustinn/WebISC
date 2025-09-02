@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
                 'angkatan' => null,
                 'jabatan' => 'Developer',
                 'divisi' => 'None',
-                'foto' => 'photo_profil/pp.png',
+                'foto' => 'photo_profil/admin.png',
             ],
             [
                 'user_id' => 2,

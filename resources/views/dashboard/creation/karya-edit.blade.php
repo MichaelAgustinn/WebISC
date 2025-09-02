@@ -1,5 +1,19 @@
 @extends('layoutDashboard.master')
 @section('content')
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .user-card {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            padding: 6px 10px;
+        }
+
+        .user-card button {
+            margin-left: 10px;
+        }
+    </style>
+
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -71,19 +85,32 @@
                                         </div>
                                     @endif
 
-                                    <div class="form-group dropdown">
-                                        <label for="jabatan">Anggota</label>
-                                        <select class="form-control" id="role" name="user_ids[]" multiple>
-                                            @foreach ($users as $u)
-                                                <option value="{{ $u->id }}"
-                                                    {{ in_array($u->id, $selectedUserIds) ? 'selected' : '' }}>
-                                                    {{ $u->name }} | {{ $u->profile->nim }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        <small class="text-muted">Tekan Ctrl (atau Cmd di Mac) untuk pilih lebih dari satu
-                                            anggota</small>
+                                    <div class="form-group">
+                                        <label for="searchBox">Cari Nama Anggota</label> <small class="text-muted">(Tekan
+                                            Ctrl (atau Cmd di Mac) untuk pilih
+                                            anggota)</small>
+                                        <input type="text" id="searchBox" class="form-control mb-2"
+                                            placeholder="Ketik nama...">
                                     </div>
+                                    <div class="form-group">
+                                        {{-- <label for="userSelect">Pilih Anggota</label> --}}
+
+                                        <select id="userSelect" class="form-control" multiple style="width: 100%;">
+                                            @foreach ($users as $u)
+                                                @if ($u->role !== 'Admin')
+                                                    <option value="{{ $u->id }}"
+                                                        data-name="{{ $u->name }} | {{ $u->profile->nim }}">
+                                                        {{ $u->name }} | {{ $u->profile->nim }}
+                                                    </option>
+                                                @endif
+                                            @endforeach 
+                                        </select>
+                                    </div>
+                                    <!-- Container untuk card nama yang dipilih -->
+                                    <div id="selectedUsers" class="d-flex flex-wrap gap-2 mb-3"></div>
+
+                                    <!-- Hidden input untuk dikirim ke backend -->
+                                    <div id="userHiddenInputs"></div>
 
                                     <div class="form-group dropdown">
                                         <label for="jabatan">Divisi</label>
@@ -116,4 +143,68 @@
             </div>
         </section>
     </div>
+    <!-- jQuery & Select2 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        const searchBox = document.getElementById('searchBox');
+        const userSelect = document.getElementById('userSelect');
+        const selectedUsersDiv = document.getElementById('selectedUsers');
+
+        const selectedUsers = new Map();
+
+        function renderSelectedUsers() {
+            selectedUsersDiv.innerHTML = '';
+
+            selectedUsers.forEach((name, id) => {
+                const card = document.createElement('div');
+                card.classList.add('user-card');
+                card.textContent = name;
+
+                const btn = document.createElement('button');
+                btn.textContent = '×';
+                btn.title = 'Hapus';
+                btn.onclick = () => {
+                    selectedUsers.delete(id);
+                    updateSelectOptions();
+                    renderSelectedUsers();
+                };
+
+                card.appendChild(btn);
+                selectedUsersDiv.appendChild(card);
+            });
+        }
+
+        function updateSelectOptions() {
+            for (let option of userSelect.options) {
+                option.selected = selectedUsers.has(option.value);
+            }
+        }
+
+        userSelect.addEventListener('change', () => {
+            // Tambah yg dipilih
+            for (let option of userSelect.options) {
+                if (option.selected) {
+                    selectedUsers.set(option.value, option.getAttribute('data-name'));
+                } else {
+                    selectedUsers.delete(option.value);
+                }
+            }
+            renderSelectedUsers();
+        });
+
+        // Filter options berdasarkan pencarian
+        searchBox.addEventListener('input', () => {
+            const keyword = searchBox.value.toLowerCase();
+
+            for (let option of userSelect.options) {
+                const text = option.textContent.toLowerCase();
+                option.style.display = text.includes(keyword) ? '' : 'none';
+            }
+        });
+
+        // Inisialisasi render jika ada yang sudah dipilih (misal dari HTML)
+        renderSelectedUsers();
+    </script>
 @endsection

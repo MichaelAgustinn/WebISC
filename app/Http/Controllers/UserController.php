@@ -45,76 +45,57 @@ class UserController extends Controller
 
     public function update(UserRequest $request, $id)
     {
+        // dd($request->all());
+        // sementara untuk debug
+        // dd($request->all());
+
         $user = User::with('profile')->findOrFail($id);
 
+        // update user
         $user->fill([
-            'name' => $request['name'],
-            'email' => $request['email'],
+            'name'  => $request->input('name'),
+            'email' => $request->input('email'),
         ]);
 
-        if (!empty($request['password'])) {
-            $user->password = bcrypt($request['password']);
+        if (!empty($request->input('password'))) {
+            $user->password = bcrypt($request->input('password'));
         }
 
         $user->save();
 
-        $profileData = $request['profile'] ?? [];
+        $profileData = $request->input('profile', []);
 
-        if ($request->hasFile('profile.image')) {
+        // ✅ simpan foto hasil crop (base64)
+        if (!empty($profileData['image'])) {
+            // hapus lama
             $oldPhoto = $user->profile->foto ?? null;
             if (!empty($oldPhoto) && Storage::disk('public')->exists($oldPhoto)) {
                 Storage::disk('public')->delete($oldPhoto);
             }
 
-            $profileData['foto'] = $request->file('profile.image')->store('photo_profil', 'public');
+            // decode base64
+            $image = preg_replace('/^data:image\/\w+;base64,/', '', $profileData['image']);
+            $image = str_replace(' ', '+', $image);
+            $imageData = base64_decode($image);
+
+            $filename = uniqid() . '.jpg';
+            Storage::disk('public')->put('photo_profil/' . $filename, $imageData);
+
+            $profileData['foto'] = 'photo_profil/' . $filename;
+
+            // hapus field image biar ga ikut ke DB
+            unset($profileData['image']);
         }
 
+        // update atau create profile
         $user->profile()->updateOrCreate(
             ['user_id' => $user->id],
             $profileData
         );
-        // $user = User::with('profile')->findOrFail($id);
-        // $profile = Profile::find($user->id);
-        // $user->fill($request->validated());
-        // $user->save();
-
-        // return $request->validated();
-        // dd($user);
-        // dd($request->validated());
-
-        // Update data Profile jika ada
-        // if ($user->profile) {
-        //     $user->profile->nim = $request->nim;
-        //     $user->profile->angkatan = $request->angkatan;
-        //     $user->profile->jabatan = $request->jabatan;
-        //     $user->profile->divisi = $request->divisi;
-
-        //     // Handle file upload
-        //     if ($request->hasFile('image')) {
-        //         if ($user->profile->foto && Storage::disk('public')->exists($user->profile->foto)) {
-        //             Storage::disk('public')->delete($user->profile->foto);
-        //         }
-        //         $user->profile->foto = $request->file('image')->store('photo_profil', 'public');
-        //     }
-
-        //     $user->profile->save();
-        // }
-        // dd($user);
-
-        // $user->name = $validatedData['name'];
-        // $user->email = $validatedData['email'];
-        // $user->password = !empty($validatedData['password']) ? bcrypt($validatedData['password']) : $user->password;
-        // $user->role = $validatedData['role'];
-
-        // $profile->nim = $validatedData['nim'];
-        // $profile->angkatan = $validatedData['angkatan'];
-        // $profile->jabatan = $validatedData['jabatan'];
-        // $profile->divisi = $validatedData['divisi'];
-
-        // $profile->save();
 
         return redirect()->route('profile.index')->with('success', 'Berhasil Diedit');
     }
+
 
     public function validate()
     {
