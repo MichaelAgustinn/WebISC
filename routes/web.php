@@ -85,6 +85,7 @@ Route::middleware('auth', 'role:Admin')->group(function () {
 
 Route::middleware('auth', 'role:Anggota,Admin,Pengurus')->group(function () {
     Route::get('/karya', [CreationController::class, 'index'])->name('karya.lihat');
+    Route::get('/karya-saya', [CreationController::class, 'karyaSaya'])->name('karya.saya.lihat');
     Route::PUT('/karya/submit', [CreationController::class, 'store'])->name('karya.submit');
     Route::get('/karya/edit/{id}', [CreationController::class, 'edit'])->name('karya.edit');
     Route::get('/karya/delete/{id}', [CreationController::class, 'destroy'])->name('karya.delete');

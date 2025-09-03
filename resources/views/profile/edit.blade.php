@@ -125,7 +125,8 @@
                                 <div class="card-body">
                                     @if (Auth::user()->role !== 'None')
                                         <a href="{{ route('karya.lihat') }}" class="btn btn-success">Tambah Karya</a>
-                                        <a href="" class="btn btn-primary">Lihat Semua Karya</a>
+                                        <a href="{{ route('karya.saya.lihat') }}" class="btn btn-primary">Lihat Semua
+                                            Karya</a>
                                     @endif
                                 </div>
                                 @if (session('success'))
@@ -235,6 +236,7 @@
                                                     </select>
                                                 </div>
                                             </div>
+
                                             <div class="form-group">
                                                 <label for="exampleInputFile">Photo Profile</label>
                                                 <div class="input-group">

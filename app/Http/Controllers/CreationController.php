@@ -24,6 +24,12 @@ class CreationController extends Controller
         return view('dashboard.creation.karya-total', ['data' => $data]);
     }
 
+    public function karyaSaya()
+    {
+        $data = Auth::user()->creation()->with('user')->get();
+        return view('dashboard.creation.karya-total', ['data' => $data]);
+    }
+
     public function detail($id)
     {
         $data = Creation::find($id);
@@ -38,39 +44,67 @@ class CreationController extends Controller
         DB::beginTransaction();
         try {
             $request->validate([
-                'title' => 'required|string|max:255',
+                'title'       => 'required|string|max:255',
                 'description' => 'required|string',
-                'divisi' => 'required|string',
-                'image' => 'nullable|image|max:2048',
-                'user_ids' => 'nullable|array',
+                'divisi'      => 'required|string',
+                'image'       => 'nullable|image|max:2048',   // untuk upload file biasa
+                'image_base64' => 'nullable|string',           // untuk cropper (base64)
+                'user_ids'    => 'nullable|array',
             ]);
-            $data = new Creation();
-            $data->title = $request->title;
-            $data->description = $request->description;
 
-            if ($request->hasFile('image')) {
-                $data->image_path = $request->file('image')->store('landing_page_image', 'public');
+            $data = new Creation();
+            $data->fill([
+                'title'       => $request->input('title'),
+                'description' => $request->input('description'),
+                'divisi'      => $request->input('divisi'),
+            ]);
+
+            $imagePath = null;
+            // --- Prioritas: pakai hasil cropper (base64) ---
+            if ($request->filled('image_base64')) {
+                $image = preg_replace('/^data:image\/\w+;base64,/', '', $request->image_base64);
+                $imageData = base64_decode($image);
+
+                $filename  = uniqid() . '.jpg';
+                Storage::disk('public')->put('karya/' . $filename, $imageData);
+
+                $imagePath = 'karya/' . $filename;
+            }
+            // --- Kalau tidak ada cropper, pakai file upload biasa ---
+            elseif ($request->hasFile('image')) {
+                $file     = $request->file('image');
+                $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+                $imagePath = $file->storeAs('karya', $filename, 'public');
             }
 
-            $data->divisi = $request->divisi;
+
+            // Set path (boleh null kalau user tidak upload)
+            $data->image_path = $imagePath;
+
             $data->save();
 
-            $allUserIds = $request->user_ids ? $request->user_ids : [];
+            // attach user login + user lain (kalau ada)
+            $allUserIds   = $request->user_ids ?? [];
             $allUserIds[] = Auth::id();
-            $data->User()->attach($allUserIds);
+            $data->user()->attach($allUserIds);
+
             DB::commit();
 
             return redirect()->route('karya.lihat')->with('success', 'Karya berhasil diunggah');
         } catch (\Exception $e) {
             DB::rollBack();
 
-            // Hapus gambar yang sempat diunggah jika ada
-            if (!empty($data->image_path)) {
+            // hapus file jika sempat terupload
+            if (!empty($data->image_path) && Storage::disk('public')->exists($data->image_path)) {
                 Storage::disk('public')->delete($data->image_path);
             }
+
             return redirect()->route('karya.lihat')->with('failed', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
+
+
+
 
     public function edit($id)
     {

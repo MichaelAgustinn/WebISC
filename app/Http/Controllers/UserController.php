@@ -45,13 +45,8 @@ class UserController extends Controller
 
     public function update(UserRequest $request, $id)
     {
-        // dd($request->all());
-        // sementara untuk debug
-        // dd($request->all());
-
         $user = User::with('profile')->findOrFail($id);
 
-        // update user
         $user->fill([
             'name'  => $request->input('name'),
             'email' => $request->input('email'),
@@ -64,8 +59,6 @@ class UserController extends Controller
         $user->save();
 
         $profileData = $request->input('profile', []);
-
-        // ✅ simpan foto hasil crop (base64)
         if (!empty($profileData['image'])) {
             // hapus lama
             $oldPhoto = $user->profile->foto ?? null;

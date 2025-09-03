@@ -1,8 +1,15 @@
 @extends('layoutDashboard.master')
 @section('content')
     <!-- Select2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
+
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
+        .content-wrapper {
+            min-height: auto !important;
+            height: auto !important;
+        }
+
         .user-card {
             background-color: #f1f1f1;
             border-radius: 5px;
@@ -50,7 +57,8 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="{{ route('karya.submit') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('karya.submit') }}" method="POST" enctype="multipart/form-data"
+                                id="karyaForm">
                                 @csrf
                                 @method('PUT')
                                 <div class="card-body">
@@ -64,20 +72,27 @@
                                         <input type="text" class="form-control" id="section" placeholder="deskripsi"
                                             name="description">
                                     </div>
+
+                                    {{-- Upload Gambar --}}
                                     <div class="form-group">
                                         <label for="exampleInputFile">Foto Karya</label>
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <input type="file" accept="image/*" class="custom-file-input"
-                                                    id="gambar-landing-page" name="image">
-                                                <label class="custom-file-label" for="gambar-landingpage">Choose
-                                                    file</label>
-                                            </div>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">Upload</span>
+                                                    id="foto-karya">
+                                                <label class="custom-file-label" for="foto-karya">Choose file</label>
                                             </div>
                                         </div>
                                     </div>
+
+                                    {{-- Tempat preview cropper --}}
+                                    <div class="form-group" style="max-width: 400px">
+                                        <img id="preview" style="max-width:100%; display:none;">
+                                    </div>
+
+                                    {{-- Hidden input buat hasil crop --}}
+                                    <input type="hidden" name="image_base64" id="imageCropped">
+
 
                                     <div class="form-group">
                                         <label for="searchBox">Cari Nama Anggota</label> <small class="text-muted">(Tekan
@@ -107,9 +122,6 @@
                                     <div id="userHiddenInputs"></div>
 
 
-
-
-
                                     <div class="form-group dropdown">
                                         <label for="jabatan">Divisi</label>
                                         <select class="form-control" id="role" name="divisi">
@@ -133,11 +145,64 @@
             </div>
         </section>
     </div>
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 
     <!-- jQuery & Select2 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        let cropper;
+        const input = document.getElementById('foto-karya');
+        const preview = document.getElementById('preview');
+        const imageCropped = document.getElementById('imageCropped');
+        const form = document.getElementById('karyaForm');
+
+        // Saat pilih gambar
+        input.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                preview.src = event.target.result;
+                preview.style.display = "block";
+
+                if (cropper) cropper.destroy();
+
+                cropper = new Cropper(preview, {
+                    aspectRatio: 2, // contoh 2:1
+                    viewMode: 1,
+                });
+            }
+            reader.readAsDataURL(file);
+        });
+
+        // Saat submit form
+        let isSubmitting = false;
+
+        form.addEventListener('submit', function(e) {
+            if (cropper && !isSubmitting) {
+                e.preventDefault(); // tahan dulu
+
+                const canvas = cropper.getCroppedCanvas({
+                    width: 600,
+                    height: 300
+                });
+
+                if (canvas) {
+                    imageCropped.value = canvas.toDataURL("image/jpeg", 0.9);
+
+                    // tandai sudah proses submit
+                    isSubmitting = true;
+
+                    // submit ulang
+                    form.submit();
+                }
+            }
+        });
+    </script>
 
     <script>
         const searchBox = document.getElementById('searchBox');
@@ -200,3 +265,6 @@
         renderSelectedUsers();
     </script>
 @endsection
+
+<script src="{{ asset('admin') }}/dist/js/adminlte.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>

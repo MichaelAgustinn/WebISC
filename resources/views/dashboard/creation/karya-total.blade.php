@@ -6,12 +6,20 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>karya Validate</h1>
+                        @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Pengurus')
+                            <h1>karya Total</h1>
+                        @else
+                            <h1>karya Saya</h1>
+                        @endif
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">karya Validate</li>
+                            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Pengurus')
+                                <li class="breadcrumb-item active">karya Total</li>
+                            @else
+                                <li class="breadcrumb-item active">karya Saya</li>
+                            @endif
                         </ol>
                     </div>
                 </div>
@@ -25,7 +33,11 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Validating Table</h3>
+                                @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Pengurus')
+                                    <h3 class="card-title">Table Karya</h3>
+                                @else
+                                    <h3 class="card-title">Table Karya</h3>
+                                @endif
                             </div>
                             <!-- ./card-header -->
                             <div class="card-body">
@@ -38,7 +50,9 @@
                                             <th>Image</th>
                                             <th>Divisi</th>
                                             <th>Status</th>
-                                            <th>Action</th>
+                                            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Pengurus')
+                                                <th>Action</th>
+                                            @endif
                                         </tr>
                                     </thead>
                                     @if (session('success'))
@@ -61,25 +75,30 @@
                                                 </td>
                                                 <td>{{ $karya->divisi }}</td>
                                                 <td>{{ $karya->status }}</td>
-                                                <td>
-                                                    @if ($karya->status != 'approve')
-                                                        <form action="{{ route('karya.validated', $karya->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('PATCH')
-                                                            <button type="submit" class="btn btn-sm btn-success">Verifikasi
-                                                                karya</button>
-                                                        </form>
-                                                    @else
-                                                        <form action="{{ route('karya.unvalidated', $karya->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('PATCH')
-                                                            <button type="submit" class="btn btn-sm btn-danger">Rejected
-                                                                Karya</button>
-                                                        </form>
-                                                    @endif
-                                                </td>
+                                                @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Pengurus')
+                                                    <td>
+                                                        @if ($karya->status != 'approve')
+                                                            <form action="{{ route('karya.validated', $karya->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('PATCH')
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-success">Verifikasi
+                                                                    karya</button>
+                                                            </form>
+                                                        @else
+                                                            <form action="{{ route('karya.unvalidated', $karya->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('PATCH')
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-danger">Rejected
+                                                                    Karya</button>
+                                                            </form>
+                                                        @endif
+                                                    </td>
+                                                @endif
+
                                             </tr>
                                         @endforeach
                                     </tbody>
