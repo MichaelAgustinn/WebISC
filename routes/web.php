@@ -23,6 +23,7 @@ Route::get('/testings', function () {
 
 Route::get('/landingpage', [LandingPageController::class, 'index'])->name('landingpage.index');
 
+Route::get('/blogs/search', [BlogController::class, 'ajaxSearch'])->name('blog.ajaxSearch');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{slug}', [BlogController::class, 'detail'])->name('blog.detail');
 

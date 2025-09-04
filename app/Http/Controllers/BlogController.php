@@ -12,6 +12,17 @@ use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
+    public function ajaxSearch(Request $request)
+    {
+        $q = $request->get('q');
+
+        $blogs = Blog::where('title', 'like', "%$q%")
+            ->orWhere('description', 'like', "%$q%")
+            ->take(5)
+            ->get(['title', 'slug', 'created_at']);
+
+        return response()->json($blogs);
+    }
     public function lihat()
     {
         $data = Blog::with('user')->get();
@@ -21,8 +32,9 @@ class BlogController extends Controller
     public function detail($slug)
     {
         // dd($slug);
+        $recent = Blog::with('user')->latest()->limit(5)->get();
         $blog = Blog::where('slug', $slug)->first();
-        return view('detail-blog', ['data' => $blog]);
+        return view('detail-blog', ['data' => $blog, 'recent' => $recent]);
     }
 
     public function index()

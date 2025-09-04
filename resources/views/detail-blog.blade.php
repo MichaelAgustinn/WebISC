@@ -49,13 +49,6 @@
                                     {!! $data->description !!}
                                 </div><!-- End post content -->
 
-                                <div class="meta-bottom">
-                                    <i class="bi bi-folder"></i>
-                                    <ul class="cats">
-                                        <li><a href="#">Uncategorized</a></li>
-                                    </ul>
-                                </div><!-- End meta bottom -->
-
                             </article>
                         </div>
                     </section><!-- /Blog Details Section -->
@@ -69,17 +62,32 @@
                         <!-- Search Widget -->
                         <div class="search-widget widget-item">
                             <h3 class="widget-title">Search</h3>
-                            <form action="">
-                                <input type="text">
+                            <form onsubmit="return false;">
+                                <input type="text" id="searchBlog" placeholder="Search...">
                                 <button type="submit" title="Search"><i class="bi bi-search"></i></button>
                             </form>
-                        </div><!--/Search Widget -->
+                        </div>
+                        <div id="searchResults" class="recent-posts-widget widget-item"></div>
+                        <!--/Search Widget -->
 
                         <!-- Recent Posts Widget -->
                         {{-- Placeholder, bisa diisi dengan query recent posts --}}
                         <div class="recent-posts-widget widget-item">
                             <h3 class="widget-title">Recent Posts</h3>
-                            {{-- Loop recent posts --}}
+                            @foreach ($recent as $data)
+                                <div class="post-item">
+                                    {{-- <img src="{{ asset($blog->first_image) }}" class="flex-shrink-0" alt=""> --}}
+                                    {{-- <p>asd</p> --}}
+                                    <img src="{{ asset($data->first_image) }}" class="flex-shrink-0" alt=""
+                                        style="max-width: 50px; max-height: 50px; object-fit: cover;">
+
+                                    <div>
+                                        <h4><a href="{{ route('blog.detail', $data->slug) }}">{{ $data->title }}</a>
+                                        </h4>
+                                        <time datetime="2020-01-01">{{ $data->created_at->format('d-m-Y') }}</time>
+                                    </div>
+                                </div><!-- End recent post item-->
+                            @endforeach
                         </div><!--/Recent Posts Widget -->
 
                     </div>
@@ -90,4 +98,32 @@
         </div>
 
     </main>
+    <script>
+        document.getElementById('searchBlog').addEventListener('keyup', function() {
+            let q = this.value;
+
+            fetch(`/blogs/search?q=${q}`)
+                .then(res => res.json())
+                .then(data => {
+                    let results = document.getElementById('searchResults');
+                    results.innerHTML = '';
+
+                    data.forEach(blog => {
+                        results.innerHTML += `
+                    <div class="post-item">
+                        <img src="{{ asset($data->first_image) }}" class="flex-shrink-0" alt=""
+                             style="max-width: 50px; max-height: 50px; object-fit: cover;">
+
+                        <div>
+                            <h4><a href="/blog/${blog.slug}">${blog.title}</a></h4>
+                            <time datetime="${blog.created_at}">
+                                ${new Date(blog.created_at).toLocaleDateString('id-ID')}
+                            </time>
+                        </div>
+                    </div>
+                `;
+                    });
+                });
+        });
+    </script>
 @endsection
