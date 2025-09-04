@@ -22,7 +22,7 @@
                 <input id="password" type="password" name="password" required autocomplete="current-password"
                     class="flex-1 px-3 py-2 rounded-l-md focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-300 " />
 
-                <button type="button" onclick="togglePassword()" class="px-3 text-gray-200 focus:outline-none">
+                <button type="button" onclick="togglePassword()" class="px-3 text-gray-500 focus:outline-none">
                     <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
