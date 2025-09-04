@@ -17,38 +17,46 @@ class ContactController extends Controller
             'open_hours' => $data['Open Hours'] ?? null,
         ]);
     }
-
     public function store(Request $request)
     {
         $request->validate([
-            'type' => 'required',
-            'name' => 'required',
+            'type'  => 'required|in:Email,Address,Phone,Open Hours',
+            'name'  => 'required',
             'value' => 'required',
         ]);
 
-        $data = new Contact();
-        $data->type = $request->type;
-        $data->name = $request->name;
-        $data->value = $request->value;
-        $data->save();
+        // update jika sudah ada, jika belum buat baru
+        Contact::updateOrCreate(
+            ['type' => $request->type], // kunci unik berdasarkan type
+            [
+                'name'  => $request->name,
+                'value' => $request->value,
+            ]
+        );
 
-        return redirect()->route('contact.create')->with('success', 'Data Berhasil Ditambahkan');
+        return redirect()
+            ->route('contact.create')
+            ->with('success', 'Data ' . $request->type . ' berhasil disimpan');
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'type' => 'required',
-            'name' => 'required',
+            'type'  => 'required|in:Email,Address,Phone,Open Hours',
+            'name'  => 'required',
             'value' => 'required',
         ]);
 
-        $data = Contact::find($request->id);
-        $data->type = $request->type;
-        $data->name = $request->name;
-        $data->value = $request->value;
-        $data->save();
+        $contact = Contact::findOrFail($id);
 
-        return redirect()->route('contact.create')->with('success', 'Data Berhasil Diubah');
+        $contact->update([
+            'type'  => $request->type,
+            'name'  => $request->name,
+            'value' => $request->value,
+        ]);
+
+        return redirect()
+            ->route('contact.create')
+            ->with('success', 'Data ' . $request->type . ' berhasil diubah');
     }
 }

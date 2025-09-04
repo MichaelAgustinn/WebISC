@@ -56,7 +56,7 @@ Route::middleware('auth', 'role:Admin,Pengurus')->group(function () {
 
     Route::get('/contact/create', [ContactController::class, 'create'])->name('contact.create');
     Route::post('/contact/submit', [ContactController::class, 'store'])->name('contact.store');
-    Route::put('/contact/update/{id}', [ContactController::class, 'update'])->name('contact.update');
+    Route::get('/contact/update/{id}', [ContactController::class, 'update'])->name('contact.update');
 
     Route::get('/blogs', [BlogController::class, 'lihat'])->name('blog.lihat');
     Route::get('/blog/create/new', [BlogController::class, 'create'])->name('blog.create');
