@@ -10,7 +10,7 @@
             <nav class="breadcrumbs">
                 <div class="container">
                     <ol>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{ route('landingpage.index') }}">Home</a></li>
                         <li class="current">Blog</li>
                     </ol>
                 </div>
